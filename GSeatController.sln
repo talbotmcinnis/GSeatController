@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatControllerCore", "GSeatControllerCore\GSeatControllerCore.csproj", "{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatInfrastructure", "GSeatInfrastructure\GSeatInfrastructure.csproj", "{ACC60798-41C8-4B6B-BF83-CB5C0C203292}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McPitGSeat", "McPitGSeat\McPitGSeat.csproj", "{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2494C7D3-D34F-4667-8F6C-FB5499D6E11B}
+	EndGlobalSection
+EndGlobal
