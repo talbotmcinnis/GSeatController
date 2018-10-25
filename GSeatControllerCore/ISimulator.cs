@@ -10,12 +10,10 @@ namespace GSeatControllerCore
         public float Pitch { get; set; }
         public float Bank { get; set; }
         public Vector3 Acceleration { get; set; }
-        public float GForce { get; set; }
     }
 
     public interface ISimulator
     {
-
         Sample GetSample { get; }
     }
 }
