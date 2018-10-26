@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatControllerCore", "GSeatControllerCore\GSeatControllerCore.csproj", "{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatControllerCore", "GSeatControllerCore\GSeatControllerCore.csproj", "{A52BC121-8A76-4714-B059-2A897AC7856E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatInfrastructure", "GSeatInfrastructure\GSeatInfrastructure.csproj", "{ACC60798-41C8-4B6B-BF83-CB5C0C203292}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatInfrastructure", "GSeatInfrastructure\GSeatInfrastructure.csproj", "{CF5F7A4A-E1F2-48C1-8C27-C9B756DF1F9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McPitGSeat", "McPitGSeat\McPitGSeat.csproj", "{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McPitGSeat", "McPitGSeat\McPitGSeat.csproj", "{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,18 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AFC5C27D-3CC6-41C4-AED3-3722C467E5FD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ACC60798-41C8-4B6B-BF83-CB5C0C203292}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AD634EF3-7F0F-4889-BD0E-E1E53DC0205B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A52BC121-8A76-4714-B059-2A897AC7856E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A52BC121-8A76-4714-B059-2A897AC7856E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A52BC121-8A76-4714-B059-2A897AC7856E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A52BC121-8A76-4714-B059-2A897AC7856E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5F7A4A-E1F2-48C1-8C27-C9B756DF1F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5F7A4A-E1F2-48C1-8C27-C9B756DF1F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5F7A4A-E1F2-48C1-8C27-C9B756DF1F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5F7A4A-E1F2-48C1-8C27-C9B756DF1F9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

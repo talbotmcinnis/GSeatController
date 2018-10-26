@@ -7,17 +7,17 @@ namespace GSeatControllerCore
 {
     public interface ISingleAxisPneumatic
     {
-        Task Inflate(float durationS);
-        Task Deflate(float durationS);
+        Task Inflate(double durationS);
+        Task Deflate(double durationS);
 
         /// <summary>
         /// Percentage Inflation per second
         /// </summary>
-        float InflationRate { get; }
+        double InflationRate { get; }
 
         /// <summary>
         /// Percentage Deflation per second
         /// </summary>
-        float DeflationRate { get; }
+        double DeflationRate { get; }
     }
 }

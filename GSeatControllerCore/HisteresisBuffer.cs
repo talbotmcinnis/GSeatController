@@ -4,20 +4,20 @@ using System.Text;
 
 namespace GSeatControllerCore
 {
-    class HisteresisBuffer<T>
+    class HisteresisBuffer
     {
-        T lastValue;
-        T buffer;
+        double lastValue;
+        double buffer;
 
-        HisteresisBuffer(T buffer)
+        public HisteresisBuffer(double buffer)
         {
             this.buffer = buffer;
             this.lastValue = 0;
         }
 
-        T Buffer(T setPoint)
+        public double Buffer(double setPoint)
         {
-            if (Math.Absolute(setPoint - this.lastValue) > buffer)
+            if (Math.Abs(setPoint - this.lastValue) > buffer)
                 this.lastValue = setPoint;
 
             return this.lastValue;

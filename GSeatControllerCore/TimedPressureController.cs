@@ -14,9 +14,9 @@ namespace GSeatControllerCore
         }
 
         ISingleAxisPneumatic pneumatic;
-        float pressurePercent;
+        double pressurePercent;
 
-        public async Task SetPressurePercent(float newPercent)
+        public async Task SetPressurePercent(double newPercent)
         {
             var deltaPercent = newPercent - pressurePercent;
 

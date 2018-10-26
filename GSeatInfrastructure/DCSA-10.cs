@@ -11,11 +11,13 @@ namespace GSeatInfrastructure
             {
                 var result = new Sample();
 
-                var selfData = LogGetSelfData();
+                //var selfData = LogGetSelfData();
 
-                result.Pitch = selfData.Pitch;
-                result.Bank = selfData.Bank;
-                result.Acceleration = LoGetAccelerationUnits();
+                //result.Pitch = selfData.Pitch;
+                //result.Bank = selfData.Bank;
+                //result.Acceleration = LoGetAccelerationUnits();
+
+                return result;
             }
 
         }

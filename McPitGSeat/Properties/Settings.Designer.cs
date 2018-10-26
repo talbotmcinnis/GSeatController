@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GSeatUI.Properties
+namespace McPitGSeat.Properties
 {
 
 

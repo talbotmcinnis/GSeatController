@@ -1,4 +1,6 @@
-﻿namespace GSeatControllerCore
+﻿using System.Threading.Tasks;
+
+namespace GSeatControllerCore
 {
     public class GSeatControllerCore
     {
@@ -14,9 +16,9 @@
         TimedPressureController leftLegTPC;
         TimedPressureController rightLegTPC;
 
-        HisteresisBuffer<float> shoulderBuffer;
-        HisteresisBuffer<float> leftLegBuffer;
-        HisteresisBuffer<float> rightLegBuffer;
+        HisteresisBuffer shoulderBuffer;
+        HisteresisBuffer leftLegBuffer;
+        HisteresisBuffer rightLegBuffer;
 
         public GSeatControllerCore(ISimulator simulator,
             ISingleAxisPneumatic shoulderPneumatic,
@@ -34,9 +36,9 @@
             this.leftLegTPC = new TimedPressureController(this.leftLegPneumatic);
             this.rightLegTPC = new TimedPressureController(this.rightLegPneumatic);
 
-            this.shoulderBuffer = new HisteresisBuffer<float>(.15);
-            this.leftLegBuffer = new HisteresisBuffer<float>(.15);
-            this.rightLegBuffer = new HisteresisBuffer<float>(.15);
+            this.shoulderBuffer = new HisteresisBuffer(.15);
+            this.leftLegBuffer = new HisteresisBuffer(.15);
+            this.rightLegBuffer = new HisteresisBuffer(.15);
 
             this.shoulderTransferCurve = shoulderTransferCurve;
             this.legTransferCurve = legTransferCurve;
@@ -47,13 +49,15 @@
             var sample = simulator.GetSample;
 
             // TODO: Translate sim data into pressures
-            sample.GForce;
-            sample.Orientation;
-            sample.Acceleration;
+            //sample.Acceleration;
+            //sample.Bank;
+            //sample.Pitch;
 
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
-
             // Roll pressure linear with orientation roll, reduced by Z-Gs
+            var desiredShoulderPressure = 0d;
+            var desiredLeftLegPressure = 0d;
+            var desiredRightLegPressure = 0d;
 
             // TODO: Translate the raw data through a transfer curve
             desiredShoulderPressure = shoulderTransferCurve.Transfer(desiredShoulderPressure);
