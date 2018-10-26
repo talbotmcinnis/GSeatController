@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Viewport3D Name="myViewport" >
+        <Viewport3D Name="myViewport" Width="300" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top">
 
             <!-- Add a camera. -->
             <Viewport3D.Camera>
@@ -51,7 +51,7 @@
                                         </DiffuseMaterial>
                                     </GeometryModel3D.Material>
 
-                                </GeometryModel3D>                                
+                                </GeometryModel3D>
                             </Model3DGroup.Children>
                         </Model3DGroup>
 
@@ -62,5 +62,7 @@
             </Viewport3D.Children>
 
         </Viewport3D>
+        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="26,360,0,0" VerticalAlignment="Top" Width="200" Value="{Binding Roll}"/>
+        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="335,27,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="167" Value="{Binding Pitch}"/>
     </Grid>
 </Window>

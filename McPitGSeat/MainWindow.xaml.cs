@@ -39,7 +39,7 @@ namespace McPitGSeat
             var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
             dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
             dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimer.Start();
+            //dispatcherTimer.Start();
         }
 
         private void DispatcherTimer_Tick(object sender, System.EventArgs e)
@@ -57,6 +57,36 @@ namespace McPitGSeat
                 {
                     pilotColor = value;
                     OnPropertyChanged("PilotColor");
+                }
+            }
+
+            double roll;
+            public double Roll
+            {
+                get
+                {
+                    return roll;
+                }
+
+                set
+                {
+                    roll = value;
+                    this.PilotColor = new SolidColorBrush(new Color() { B = (byte)(roll * byte.MaxValue), A=Byte.MaxValue });
+                }
+            }
+
+            double pitch;
+            public double Pitch
+            {
+                get
+                {
+                    return pitch;
+                }
+
+                set
+                {
+                    pitch = value;
+                    this.PilotColor = new SolidColorBrush(new Color() { G = (byte)(pitch*byte.MaxValue), A = Byte.MaxValue });
                 }
             }
 
