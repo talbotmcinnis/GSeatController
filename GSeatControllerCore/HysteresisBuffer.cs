@@ -4,12 +4,12 @@ using System.Text;
 
 namespace GSeatControllerCore
 {
-    class HisteresisBuffer
+    class HysteresisBuffer
     {
         double lastValue;
         double buffer;
 
-        public HisteresisBuffer(double buffer)
+        public HysteresisBuffer(double buffer)
         {
             this.buffer = buffer;
             this.lastValue = 0;

@@ -74,7 +74,7 @@ namespace GSeatControllerCore
             desiredLeftLegPressure = legTransferCurve.Transfer(desiredLeftLegPressure);
             desiredRightLegPressure = legTransferCurve.Transfer(desiredRightLegPressure);
 
-            // Apply a histeresis
+            // Apply a hysteresis
             desiredShoulderPressure = shoulderBuffer.Buffer(desiredShoulderPressure);
             desiredLeftLegPressure = leftLegBuffer.Buffer(desiredLeftLegPressure);
             desiredRightLegPressure = rightLegBuffer.Buffer(desiredRightLegPressure);
