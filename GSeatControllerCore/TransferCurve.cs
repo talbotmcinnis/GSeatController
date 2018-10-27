@@ -16,24 +16,31 @@ namespace GSeatControllerCore
 
         public double Transfer(double input)
         {
-            if (input < points.First().X)
+            if (input <= points.First().X)
                 return points.First().Y;
-            else if (input > points.Last().X)
+            else if (input >= points.Last().X)
                 return points.Last().Y;
 
-            var rangeStart = points.FirstOrDefault(p => p.X >= input);
-            if( rangeStart == null )
-                rangeStart = points.First();
-            var rangeEnd = points.Reverse().FirstOrDefault(p => p.X <= input);
-            if( rangeEnd == null )
-                rangeEnd = points.Last();
+            var rangeStart = points.GetEnumerator();
+            var rangeEnd = points.GetEnumerator();
+            rangeStart.MoveNext();
+            rangeEnd.MoveNext(); rangeEnd.MoveNext();
 
-            // We have a range, now simply interpolate'
-            var rangeXPos = input / (rangeEnd.X - rangeStart.X);
+            do
+            {
+                if (rangeStart.Current.X <= input && input < rangeEnd.Current.X)
+                {
+                    // We have a range, now simply interpolate'
+                    var rangeXPos = input / (rangeEnd.Current.X - rangeStart.Current.X);
 
-            var result = rangeStart.Y + rangeXPos * (rangeEnd.Y - rangeEnd.Y);
+                    var result = rangeStart.Current.Y + rangeXPos * (rangeEnd.Current.Y - rangeStart.Current.Y);
 
-            return result;
+                    return result;
+                }
+
+                rangeStart.MoveNext();
+                rangeEnd.MoveNext();
+            } while (true);
         }
     }
 }

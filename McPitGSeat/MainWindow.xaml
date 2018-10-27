@@ -5,64 +5,104 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:McPitGSeat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Viewport3D Name="myViewport" Width="300" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top">
+        Title="MainWindow" Height="386.047" Width="800">
+    <Grid Margin="0,0,0,3">
+        <Grid Width="300" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black">
+            <Viewport3D Name="myViewport"  >
 
-            <!-- Add a camera. -->
-            <Viewport3D.Camera>
-                <PerspectiveCamera 
+                <!-- Add a camera. -->
+                <Viewport3D.Camera>
+                    <PerspectiveCamera 
 						FarPlaneDistance="20" 
 						LookDirection="0,0,1" 
 						UpDirection="0,1,0" 
 						NearPlaneDistance="1" 
 						Position="0,0,-3" 
 						FieldOfView="45" />
-            </Viewport3D.Camera>
+                </Viewport3D.Camera>
 
-            <!-- Add models. -->
-            <Viewport3D.Children>
+                <!-- Add models. -->
+                <Viewport3D.Children>
 
-                <ModelVisual3D>
-                    <ModelVisual3D.Content>
+                    <ModelVisual3D>
+                        <ModelVisual3D.Content>
 
-                        <Model3DGroup>
-                            <Model3DGroup.Children>
+                            <Model3DGroup>
+                                <Model3DGroup.Children>
 
-                                <!-- Lights, MeshGeometry3D and DiffuseMaterial objects are added to the ModelVisual3D. -->
-                                <DirectionalLight Color="#FFFFFFFF" Direction="3,-4,5" />
+                                    <!-- Lights, MeshGeometry3D and DiffuseMaterial objects are added to the ModelVisual3D. -->
+                                    <PointLight Color="#FFFFFFFF" Position="10,0,0" />
+                                    <PointLight Color="#FFFFFFFF" Position="-10,0,0" />
+                                    <PointLight Color="#FFFFFFFF" Position="0,-10,0" />
+                                    <PointLight Color="#FFFFFFFF" Position="0,10,0" />
 
-                                <!-- Define a red cone. -->
-                                <GeometryModel3D>
 
-                                    <GeometryModel3D.Geometry>
-                                        <MeshGeometry3D 
+                                    <!-- Define a red cone. -->
+                                    <GeometryModel3D>
+
+                                        <GeometryModel3D.Geometry>
+                                            <MeshGeometry3D 
     Positions="0.293893 -0.5 0.404509  0.475528 -0.5 0.154509  0 0.5 0  0.475528 -0.5 0.154509  0 0.5 0  0 0.5 0  0.475528 -0.5 0.154509  0.475528 -0.5 -0.154509  0 0.5 0  0.475528 -0.5 -0.154509  0 0.5 0  0 0.5 0  0.475528 -0.5 -0.154509  0.293893 -0.5 -0.404509  0 0.5 0  0.293893 -0.5 -0.404509  0 0.5 0  0 0.5 0  0.293893 -0.5 -0.404509  0 -0.5 -0.5  0 0.5 0  0 -0.5 -0.5  0 0.5 0  0 0.5 0  0 -0.5 -0.5  -0.293893 -0.5 -0.404509  0 0.5 0  -0.293893 -0.5 -0.404509  0 0.5 0  0 0.5 0  -0.293893 -0.5 -0.404509  -0.475528 -0.5 -0.154509  0 0.5 0  -0.475528 -0.5 -0.154509  0 0.5 0  0 0.5 0  -0.475528 -0.5 -0.154509  -0.475528 -0.5 0.154509  0 0.5 0  -0.475528 -0.5 0.154509  0 0.5 0  0 0.5 0  -0.475528 -0.5 0.154509  -0.293892 -0.5 0.404509  0 0.5 0  -0.293892 -0.5 0.404509  0 0.5 0  0 0.5 0  -0.293892 -0.5 0.404509  0 -0.5 0.5  0 0.5 0  0 -0.5 0.5  0 0.5 0  0 0.5 0  0 -0.5 0.5  0.293893 -0.5 0.404509  0 0.5 0  0.293893 -0.5 0.404509  0 0.5 0  0 0.5 0  " 
     Normals="0.7236065,0.4472139,0.5257313  0.2763934,0.4472138,0.8506507  0.5308242,0.4294462,0.7306172  0.2763934,0.4472138,0.8506507  0,0.4294458,0.9030925  0.5308242,0.4294462,0.7306172  0.2763934,0.4472138,0.8506507  -0.2763934,0.4472138,0.8506507  0,0.4294458,0.9030925  -0.2763934,0.4472138,0.8506507  -0.5308242,0.4294462,0.7306172  0,0.4294458,0.9030925  -0.2763934,0.4472138,0.8506507  -0.7236065,0.4472139,0.5257313  -0.5308242,0.4294462,0.7306172  -0.7236065,0.4472139,0.5257313  -0.858892,0.429446,0.279071  -0.5308242,0.4294462,0.7306172  -0.7236065,0.4472139,0.5257313  -0.8944269,0.4472139,0  -0.858892,0.429446,0.279071  -0.8944269,0.4472139,0  -0.858892,0.429446,-0.279071  -0.858892,0.429446,0.279071  -0.8944269,0.4472139,0  -0.7236065,0.4472139,-0.5257313  -0.858892,0.429446,-0.279071  -0.7236065,0.4472139,-0.5257313  -0.5308242,0.4294462,-0.7306172  -0.858892,0.429446,-0.279071  -0.7236065,0.4472139,-0.5257313  -0.2763934,0.4472138,-0.8506507  -0.5308242,0.4294462,-0.7306172  -0.2763934,0.4472138,-0.8506507  0,0.4294458,-0.9030925  -0.5308242,0.4294462,-0.7306172  -0.2763934,0.4472138,-0.8506507  0.2763934,0.4472138,-0.8506507  0,0.4294458,-0.9030925  0.2763934,0.4472138,-0.8506507  0.5308249,0.4294459,-0.7306169  0,0.4294458,-0.9030925  0.2763934,0.4472138,-0.8506507  0.7236068,0.4472141,-0.5257306  0.5308249,0.4294459,-0.7306169  0.7236068,0.4472141,-0.5257306  0.8588922,0.4294461,-0.27907  0.5308249,0.4294459,-0.7306169  0.7236068,0.4472141,-0.5257306  0.8944269,0.4472139,0  0.8588922,0.4294461,-0.27907  0.8944269,0.4472139,0  0.858892,0.429446,0.279071  0.8588922,0.4294461,-0.27907  0.8944269,0.4472139,0  0.7236065,0.4472139,0.5257313  0.858892,0.429446,0.279071  0.7236065,0.4472139,0.5257313  0.5308242,0.4294462,0.7306172  0.858892,0.429446,0.279071  "                   TriangleIndices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 " />
-                                    </GeometryModel3D.Geometry>
+                                        </GeometryModel3D.Geometry>
 
-                                    <GeometryModel3D.Material>
-                                        <DiffuseMaterial Brush="{Binding PilotColor}">
-                                            <!--<DiffuseMaterial.Brush>
-                                                <SolidColorBrush 
+                                        <GeometryModel3D.Material>
+                                            <DiffuseMaterial>
+                                                <DiffuseMaterial.Brush>
+                                                    <SolidColorBrush 
                             Color="Red" 
                             Opacity="1.0"/>
-                                            </DiffuseMaterial.Brush>-->
-                                        </DiffuseMaterial>
-                                    </GeometryModel3D.Material>
+                                                </DiffuseMaterial.Brush>
+                                            </DiffuseMaterial>
+                                        </GeometryModel3D.Material>
 
-                                </GeometryModel3D>
-                            </Model3DGroup.Children>
-                        </Model3DGroup>
+                                        <GeometryModel3D.Transform>
+                                            <Transform3DGroup>
+                                                <Transform3DGroup.Children>
+                                                    <RotateTransform3D>
+                                                        <RotateTransform3D.Rotation>
+                                                            <AxisAngleRotation3D x:Name="myRollRotation" Axis="0,0,1" Angle="{Binding Roll}" />
+                                                        </RotateTransform3D.Rotation>
+                                                    </RotateTransform3D>
+                                                    <RotateTransform3D>
+                                                        <RotateTransform3D.Rotation>
+                                                            <AxisAngleRotation3D x:Name="myPitchRotation" Axis="1,0,0" Angle="{Binding Pitch}" />
+                                                        </RotateTransform3D.Rotation>
+                                                    </RotateTransform3D>
+                                                </Transform3DGroup.Children>
+                                            </Transform3DGroup>
+                                        </GeometryModel3D.Transform>
+                                    </GeometryModel3D>
+                                </Model3DGroup.Children>
+                            </Model3DGroup>
 
-                    </ModelVisual3D.Content>
+                        </ModelVisual3D.Content>
 
-                </ModelVisual3D>
+                    </ModelVisual3D>
 
-            </Viewport3D.Children>
+                </Viewport3D.Children>
 
-        </Viewport3D>
-        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="26,360,0,0" VerticalAlignment="Top" Width="200" Value="{Binding Roll}"/>
-        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="335,27,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="167" Value="{Binding Pitch}"/>
+            </Viewport3D>
+        </Grid>
+        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="290" Value="{Binding Roll}" Maximum="180" Minimum="-180" LargeChange="15" SmallChange="1" TickFrequency="15"/>
+        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="305,31,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="269" Value="{Binding Pitch}" LargeChange="15" Maximum="180" Minimum="-180" SmallChange="1" TickFrequency="15"/>
+        <Slider x:Name="sliderGY" HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="290" Value="{Binding GY}" Maximum="8" Minimum="-2" SmallChange="0.25" TickFrequency="15"/>
+        <Label x:Name="label" Content="Roll" HorizontalAlignment="Left" Margin="140,328,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Pitch" HorizontalAlignment="Left" Margin="298,0,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy1" Content="GY" HorizontalAlignment="Left" Margin="346,299,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sliderGZ" HorizontalAlignment="Left" Margin="374,177,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="123" Value="{Binding GZ}" Maximum="4" Minimum="-4" SmallChange="0.25" TickFrequency="15"/>
+        <Label x:Name="label_Copy2" Content="GZ" HorizontalAlignment="Left" Margin="372,299,0,0" VerticalAlignment="Top"/>
+
+        <CheckBox Content="R1" HorizontalAlignment="Left" Margin="603,305,0,0" VerticalAlignment="Top" IsChecked="{Binding R1}" IsEnabled="False"/>
+        <CheckBox Content="R2" HorizontalAlignment="Left" Margin="603,203,0,0" VerticalAlignment="Top" IsChecked="{Binding R2}" IsEnabled="False"/>
+        <Slider HorizontalAlignment="Left" Margin="576,203,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding ShoulderPressurePercent}" Width="27" Orientation="Vertical" Height="120"/>
+
+        <CheckBox Content="R3" HorizontalAlignment="Left" Margin="458,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R3}" IsEnabled="False"/>
+        <CheckBox Content="R4" HorizontalAlignment="Left" Margin="515,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R4}" IsEnabled="False"/>
+        <Slider HorizontalAlignment="Left" Margin="458,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding LeftLegPressurePercent}" Width="90    "/>
+
+        <CheckBox Content="R5" HorizontalAlignment="Left" Margin="624,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R5}" IsEnabled="False"/>
+        <CheckBox Content="R6" HorizontalAlignment="Left" Margin="681,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R6}" IsEnabled="False"/>
+        <Slider HorizontalAlignment="Left" Margin="624,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding RightLegPressurePercent}" Width="90" IsDirectionReversed="True"/>
     </Grid>
 </Window>

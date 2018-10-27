@@ -10,15 +10,15 @@ namespace GSeatControllerCore
         public TimedPressureController(ISingleAxisPneumatic pneumatic)
         {
             this.pneumatic = pneumatic;
-            this.pressurePercent = 0;
+            this.PressurePercent = 0;
         }
 
         ISingleAxisPneumatic pneumatic;
-        double pressurePercent;
+        public double PressurePercent { get; private set; }
 
         public async Task SetPressurePercent(double newPercent)
         {
-            var deltaPercent = newPercent - pressurePercent;
+            var deltaPercent = newPercent - PressurePercent;
 
             if (deltaPercent > 0)
             {
@@ -31,6 +31,7 @@ namespace GSeatControllerCore
                 var deflationDurationS = (-deltaPercent) / pneumatic.DeflationRate;
                 await pneumatic.Deflate(deflationDurationS);
             }
+            this.PressurePercent = newPercent;
         }
     }
 

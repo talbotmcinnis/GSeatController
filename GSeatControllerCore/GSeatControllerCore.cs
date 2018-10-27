@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace GSeatControllerCore
 {
@@ -12,9 +13,9 @@ namespace GSeatControllerCore
         TransferCurve shoulderTransferCurve;
         TransferCurve legTransferCurve;
 
-        TimedPressureController shoulderTPC;
-        TimedPressureController leftLegTPC;
-        TimedPressureController rightLegTPC;
+        public TimedPressureController ShoulderTPC { get; private set; }
+        public TimedPressureController LeftLegTPC { get; private set; }
+        public TimedPressureController RightLegTPC { get; private set; }
 
         HisteresisBuffer shoulderBuffer;
         HisteresisBuffer leftLegBuffer;
@@ -32,9 +33,9 @@ namespace GSeatControllerCore
             this.leftLegPneumatic = leftLegPneumatic;
             this.rightLegPneumatic = rightLegPneumatic;
 
-            this.shoulderTPC = new TimedPressureController(this.shoulderPneumatic);
-            this.leftLegTPC = new TimedPressureController(this.leftLegPneumatic);
-            this.rightLegTPC = new TimedPressureController(this.rightLegPneumatic);
+            this.ShoulderTPC = new TimedPressureController(this.shoulderPneumatic);
+            this.LeftLegTPC = new TimedPressureController(this.leftLegPneumatic);
+            this.RightLegTPC = new TimedPressureController(this.rightLegPneumatic);
 
             this.shoulderBuffer = new HisteresisBuffer(.15);
             this.leftLegBuffer = new HisteresisBuffer(.15);
@@ -48,18 +49,13 @@ namespace GSeatControllerCore
         {
             var sample = simulator.GetSample;
 
-            // TODO: Translate sim data into pressures
-            //sample.Acceleration;
-            //sample.Bank;
-            //sample.Pitch;
-
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
             // Roll pressure linear with orientation roll, reduced by Z-Gs
-            var desiredShoulderPressure = 0d;
-            var desiredLeftLegPressure = 0d;
-            var desiredRightLegPressure = 0d;
+            var desiredShoulderPressure = (sample.Acceleration.Y / 4) + (sample.Acceleration.Z / 4) + Math.Abs(sample.Pitch)/90;
+            var desiredLeftLegPressure = sample.Roll < 0 ? -sample.Roll/90 : 0;
+            var desiredRightLegPressure = sample.Roll > 0 ? sample.Roll / 90 : 0;
 
-            // TODO: Translate the raw data through a transfer curve
+            // Translate the raw data through a transfer curve
             desiredShoulderPressure = shoulderTransferCurve.Transfer(desiredShoulderPressure);
             desiredLeftLegPressure = legTransferCurve.Transfer(desiredLeftLegPressure);
             desiredRightLegPressure = legTransferCurve.Transfer(desiredRightLegPressure);
@@ -70,9 +66,9 @@ namespace GSeatControllerCore
             desiredRightLegPressure = rightLegBuffer.Buffer(desiredRightLegPressure);
 
             // Apply the calculated pressures
-            await this.shoulderTPC.SetPressurePercent(desiredShoulderPressure);
-            await this.leftLegTPC.SetPressurePercent(desiredLeftLegPressure);
-            await this.rightLegTPC.SetPressurePercent(desiredRightLegPressure);
+            await this.ShoulderTPC.SetPressurePercent(desiredShoulderPressure);
+            await this.LeftLegTPC.SetPressurePercent(desiredLeftLegPressure);
+            await this.RightLegTPC.SetPressurePercent(desiredRightLegPressure);
         }
     }
 }

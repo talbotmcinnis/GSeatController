@@ -4,10 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Media3D;
 
 namespace McPitGSeat
 {
@@ -19,45 +16,54 @@ namespace McPitGSeat
         public MainWindow()
         {
             InitializeComponent();
-
-            var relays = new DenkoviRelays(0);
-            var simulator = new DCSA_10();
-            var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 50, 50);
-            var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(100, 100) });
-
-            var leftLegPneumatic = new McPitPneumatic(relays, 3, 4, 25, 15);
-            var rightLegPneumatic = new McPitPneumatic(relays, 5, 6, 25, 15);
-            var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(100, 100) });
-
-            var core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
-
-            var vm = new MyViewModel();
-            vm.PilotColor = new SolidColorBrush(Colors.Green);
-            //myViewport.Children[0]..Add(CreatePilotBody());
+            
+            var vm = new GSeatVM();
             this.DataContext = vm;
-
-            var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromSeconds(1);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
-            //dispatcherTimer.Start();
         }
 
-        private void DispatcherTimer_Tick(object sender, System.EventArgs e)
-        {
-            (this.DataContext as MyViewModel).PilotColor = new SolidColorBrush(Colors.Pink);
-        }
 
-        public class MyViewModel : INotifyPropertyChanged
+        public class GSeatVM : INotifyPropertyChanged
         {
-            SolidColorBrush pilotColor;
-            public SolidColorBrush PilotColor
+            GSeatControllerCore.GSeatControllerCore core;
+            DebugRelays relays;
+
+            public GSeatVM()
             {
-                get { return pilotColor; }
-                set
-                {
-                    pilotColor = value;
-                    OnPropertyChanged("PilotColor");
-                }
+                //var relays = new DenkoviRelays(0);
+                relays = new DebugRelays(6);
+                
+                //var simulator = new DCSA_10();
+                var simulator = new UIDrivenSimSim(this);
+
+                var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 50, 50);
+                var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(1, 1) });
+
+                var leftLegPneumatic = new McPitPneumatic(relays, 3, 4, 25, 15);
+                var rightLegPneumatic = new McPitPneumatic(relays, 5, 6, 25, 15);
+                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(1, 1) });
+
+                core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
+
+                var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+                dispatcherTimer.Tick += DispatcherTimer_Tick;
+                dispatcherTimer.Start();
+            }
+
+            private async void DispatcherTimer_Tick(object sender, System.EventArgs e)
+            {
+                await core.SyncSeatToSim();
+
+                this.R1 = relays.relayStates[1];
+                this.R2 = relays.relayStates[2];
+                this.R3 = relays.relayStates[3];
+                this.R4 = relays.relayStates[4];
+                this.R5 = relays.relayStates[5];
+                this.R6 = relays.relayStates[6];
+
+                this.ShoulderPressurePercent = core.ShoulderTPC.PressurePercent;
+                this.LeftLegPressurePercent = core.LeftLegTPC.PressurePercent;
+                this.RightLegPressurePercent = core.RightLegTPC.PressurePercent;
             }
 
             double roll;
@@ -71,7 +77,7 @@ namespace McPitGSeat
                 set
                 {
                     roll = value;
-                    this.PilotColor = new SolidColorBrush(new Color() { B = (byte)(roll * byte.MaxValue), A=Byte.MaxValue });
+                    OnPropertyChanged("Roll");
                 }
             }
 
@@ -86,7 +92,118 @@ namespace McPitGSeat
                 set
                 {
                     pitch = value;
-                    this.PilotColor = new SolidColorBrush(new Color() { G = (byte)(pitch*byte.MaxValue), A = Byte.MaxValue });
+                    OnPropertyChanged("Pitch");
+                }
+            }
+
+            public float GY { get; set; }
+            public float GZ { get; set; }
+
+            bool r1;
+            public bool R1
+            {
+                get { return r1; }
+
+                set
+                {
+                    r1 = value;
+                    OnPropertyChanged("R1");
+                }
+            }
+
+            bool r2;
+            public bool R2
+            {
+                get { return r2; }
+
+                set
+                {
+                    r2 = value;
+                    OnPropertyChanged("R2");
+                }
+            }
+
+            bool r3;
+            public bool R3
+            {
+                get { return r3; }
+
+                set
+                {
+                    r3 = value;
+                    OnPropertyChanged("R3");
+                }
+            }
+
+            bool r4;
+            public bool R4
+            {
+                get { return r4; }
+
+                set
+                {
+                    r4 = value;
+                    OnPropertyChanged("R4");
+                }
+            }
+
+            bool r5;
+            public bool R5
+            {
+                get { return r5; }
+
+                set
+                {
+                    r5 = value;
+                    OnPropertyChanged("R5");
+                }
+            }
+
+            bool r6;
+            public bool R6
+            {
+                get { return r6; }
+
+                set
+                {
+                    r6 = value;
+                    OnPropertyChanged("R6");
+                }
+            }
+
+            double shoulderPressurePercent;
+            public double ShoulderPressurePercent
+            {
+                get { return shoulderPressurePercent; }
+
+                set
+                {
+                    shoulderPressurePercent = value;
+                    OnPropertyChanged("ShoulderPressurePercent");
+                }
+            }
+
+            double leftLegPressurePercent;
+            public double LeftLegPressurePercent
+            {
+                get { return leftLegPressurePercent; }
+
+                set
+                {
+                    leftLegPressurePercent = value;
+                    OnPropertyChanged("LeftLegPressurePercent");
+                }
+            }
+
+            double rightLegPressurePercent;
+            public double RightLegPressurePercent
+            {
+                get { return rightLegPressurePercent; }
+
+                set
+                {
+                    rightLegPressurePercent = value;
+                    OnPropertyChanged("RightLegPressurePercent");
                 }
             }
 
@@ -98,96 +215,5 @@ namespace McPitGSeat
                     handler(this, new PropertyChangedEventArgs(name));
             }
         }
-
-        //private Model3D CreatePilotBody()
-        //{
-        //    var myModel = new GeometryModel3D();
-        //    var myMeshGeometry = new MeshGeometry3D();
-
-        //    myMeshGeometry.Positions = new Point3DCollection(
-        //        new List<Point3D>()
-        //        {
-        //            new Point3D(0.293893,-0.5,0.404509),
-        //            new Point3D(0.475528,-0.5,0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.475528,-0.5,0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.475528,-0.5,0.154509),
-        //            new Point3D(0.475528,-0.5,-0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.475528,-0.5,-0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.475528,-0.5,-0.154509),
-        //            new Point3D(0.293893,-0.5,-0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.293893,-0.5,-0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.293893,-0.5,-0.404509),
-        //            new Point3D(0,-0.5,-0.5),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,-0.5,-0.5),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,-0.5,-0.5),
-        //            new Point3D(-0.293893,-0.5,-0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.293893,-0.5,-0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.293893,-0.5,-0.404509),
-        //            new Point3D(-0.475528,-0.5,-0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.475528,-0.5,-0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.475528,-0.5,-0.154509),
-        //            new Point3D(-0.475528,-0.5,0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.475528,-0.5,0.154509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.475528,-0.5,0.154509),
-        //            new Point3D(-0.293892,-0.5,0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.293892,-0.5,0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(-0.293892,-0.5,0.404509),
-        //            new Point3D(0,-0.5,0.5),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,-0.5,0.5),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,-0.5,0.5),
-        //            new Point3D(0.293893,-0.5,0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0.293893,-0.5,0.404509),
-        //            new Point3D(0,0.5,0),
-        //            new Point3D(0,0.5,0)
-        //        });
-        //    myMeshGeometry.Normals = new Vector3DCollection(
-        //        new List<Vector3D>()
-        //        {
-        //            new Vector3D(0.7236065,0.4472139,0.5257313), new Vector3D(0.2763934,0.4472138,0.8506507), new Vector3D(0.5308242,0.4294462,0.7306172), new Vector3D(0.2763934,0.4472138,0.8506507), new Vector3D(0,0.4294458,0.9030925), new Vector3D(0.5308242,0.4294462,0.7306172), new Vector3D(0.2763934,0.4472138,0.8506507), new Vector3D(-0.2763934,0.4472138,0.8506507), new Vector3D(0,0.4294458,0.9030925), new Vector3D(-0.2763934,0.4472138,0.8506507), new Vector3D(-0.5308242,0.4294462,0.7306172), new Vector3D(0,0.4294458,0.9030925), new Vector3D(-0.2763934,0.4472138,0.8506507), new Vector3D(-0.7236065,0.4472139,0.5257313), new Vector3D(-0.5308242,0.4294462,0.7306172), new Vector3D(-0.7236065,0.4472139,0.5257313), new Vector3D(-0.858892,0.429446,0.279071), new Vector3D(-0.5308242,0.4294462,0.7306172), new Vector3D(-0.7236065,0.4472139,0.5257313), new Vector3D(-0.8944269,0.4472139,0), new Vector3D(-0.858892,0.429446,0.279071), new Vector3D(-0.8944269,0.4472139,0), new Vector3D(-0.858892,0.429446,-0.279071), new Vector3D(-0.858892,0.429446,0.279071), new Vector3D(-0.8944269,0.4472139,0), new Vector3D(-0.7236065,0.4472139,-0.5257313), new Vector3D(-0.858892,0.429446,-0.279071), new Vector3D(-0.7236065,0.4472139,-0.5257313), new Vector3D(-0.5308242,0.4294462,-0.7306172), new Vector3D(-0.858892,0.429446,-0.279071), new Vector3D(-0.7236065,0.4472139,-0.5257313), new Vector3D(-0.2763934,0.4472138,-0.8506507), new Vector3D(-0.5308242,0.4294462,-0.7306172), new Vector3D(-0.2763934,0.4472138,-0.8506507), new Vector3D(0,0.4294458,-0.9030925), new Vector3D(-0.5308242,0.4294462,-0.7306172), new Vector3D(-0.2763934,0.4472138,-0.8506507), new Vector3D(0.2763934,0.4472138,-0.8506507), new Vector3D(0,0.4294458,-0.9030925), new Vector3D(0.2763934,0.4472138,-0.8506507), new Vector3D(0.5308249,0.4294459,-0.7306169), new Vector3D(0,0.4294458,-0.9030925), new Vector3D(0.2763934,0.4472138,-0.8506507), new Vector3D(0.7236068,0.4472141,-0.5257306), new Vector3D(0.5308249,0.4294459,-0.7306169), new Vector3D(0.7236068,0.4472141,-0.5257306), new Vector3D(0.8588922,0.4294461,-0.27907), new Vector3D(0.5308249,0.4294459,-0.7306169), new Vector3D(0.7236068,0.4472141,-0.5257306), new Vector3D(0.8944269,0.4472139,0), new Vector3D(0.8588922,0.4294461,-0.27907), new Vector3D(0.8944269,0.4472139,0), new Vector3D(0.858892,0.429446,0.279071), new Vector3D(0.8588922,0.4294461,-0.27907), new Vector3D(0.8944269,0.4472139,0), new Vector3D(0.7236065,0.4472139,0.5257313), new Vector3D(0.858892,0.429446,0.279071), new Vector3D(0.7236065,0.4472139,0.5257313), new Vector3D(0.5308242,0.4294462,0.7306172), new Vector3D(0.858892,0.429446,0.279071)
-        //        });
-
-        //    myMeshGeometry.TriangleIndices = new Int32Collection(
-        //        new List<int>()
-        //        {
-        //            0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59
-        //        }
-        //        );
-
-        //    myModel.Geometry = myMeshGeometry;
-        //    var myBrush = new SolidColorBrush(Colors.Blue);
-        //    myBrush.Opacity = 0.8;
-        //    var myMaterial = new DiffuseMaterial(Brushes.Blue);
-        //    myModel.Material = myMaterial;
-
-        //    return myModel;
-        //}
     }
 }

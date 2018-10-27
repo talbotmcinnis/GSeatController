@@ -8,7 +8,7 @@ namespace GSeatControllerCore
     public class Sample
     {
         public double Pitch { get; set; }
-        public double Bank { get; set; }
+        public double Roll { get; set; }
         public Vector3 Acceleration { get; set; }
     }
 
