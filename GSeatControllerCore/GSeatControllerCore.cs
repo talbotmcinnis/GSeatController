@@ -17,9 +17,9 @@ namespace GSeatControllerCore
         public TimedPressureController LeftLegTPC { get; private set; }
         public TimedPressureController RightLegTPC { get; private set; }
 
-        HisteresisBuffer shoulderBuffer;
-        HisteresisBuffer leftLegBuffer;
-        HisteresisBuffer rightLegBuffer;
+        HysteresisBuffer shoulderBuffer;
+        HysteresisBuffer leftLegBuffer;
+        HysteresisBuffer rightLegBuffer;
 
         public GSeatControllerCore(ISimulator simulator,
             ISingleAxisPneumatic shoulderPneumatic,
@@ -37,9 +37,9 @@ namespace GSeatControllerCore
             this.LeftLegTPC = new TimedPressureController(this.leftLegPneumatic);
             this.RightLegTPC = new TimedPressureController(this.rightLegPneumatic);
 
-            this.shoulderBuffer = new HisteresisBuffer(.15);
-            this.leftLegBuffer = new HisteresisBuffer(.15);
-            this.rightLegBuffer = new HisteresisBuffer(.15);
+            this.shoulderBuffer = new HysteresisBuffer(.15);
+            this.leftLegBuffer = new HysteresisBuffer(.15);
+            this.rightLegBuffer = new HysteresisBuffer(.15);
 
             this.shoulderTransferCurve = shoulderTransferCurve;
             this.legTransferCurve = legTransferCurve;

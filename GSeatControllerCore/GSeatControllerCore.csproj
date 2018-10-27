@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GSeatControllerCore.cs" />
-    <Compile Include="HisteresisBuffer.cs" />
+    <Compile Include="HysteresisBuffer.cs" />
     <Compile Include="IRelays.cs" />
     <Compile Include="ISimulator.cs" />
     <Compile Include="ISingleAxisPneumatic.cs" />
