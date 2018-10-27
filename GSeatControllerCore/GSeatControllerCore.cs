@@ -51,9 +51,23 @@ namespace GSeatControllerCore
 
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
             // Roll pressure linear with orientation roll, reduced by Z-Gs
-            var desiredShoulderPressure = (sample.Acceleration.Y / 4) + (sample.Acceleration.Z / 4) + Math.Abs(sample.Pitch)/90;
-            var desiredLeftLegPressure = sample.Roll < 0 ? -sample.Roll/90 : 0;
-            var desiredRightLegPressure = sample.Roll > 0 ? sample.Roll / 90 : 0;
+            var accelShoulder = sample.Acceleration.Z < 0 ? -sample.Acceleration.Z / 2 : 0;
+            float gForceShoulder = 0;
+            if( sample.Acceleration.Y > 1 )
+                gForceShoulder = (sample.Acceleration.Y - 1) / 4;  // Positive Gs
+            else if( sample.Acceleration.Y < 1 )
+                gForceShoulder = (sample.Acceleration.Y - 1) / -2;  // Negative Gs
+
+            var pitchShoulderForce = sample.Pitch < 0 ? -sample.Pitch / 90 : 0;
+            var desiredShoulderPressure = accelShoulder + gForceShoulder + pitchShoulderForce;
+
+            var normalizedRoll = sample.Roll;
+            if (normalizedRoll > 90)
+                normalizedRoll = 180 - normalizedRoll;
+            else if (normalizedRoll < -90)
+                normalizedRoll = -180 - normalizedRoll;
+            var desiredLeftLegPressure = normalizedRoll < 0 ? -normalizedRoll/ 90 : 0;
+            var desiredRightLegPressure = normalizedRoll > 0 ? normalizedRoll / 90 : 0;
 
             // Translate the raw data through a transfer curve
             desiredShoulderPressure = shoulderTransferCurve.Transfer(desiredShoulderPressure);

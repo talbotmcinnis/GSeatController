@@ -29,6 +29,7 @@ namespace McPitGSeat
 
             public GSeatVM()
             {
+                this.GY = 1.0f;
                 //var relays = new DenkoviRelays(0);
                 relays = new DebugRelays(6);
                 
@@ -36,11 +37,11 @@ namespace McPitGSeat
                 var simulator = new UIDrivenSimSim(this);
 
                 var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 50, 50);
-                var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(1, 1) });
+                var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
 
                 var leftLegPneumatic = new McPitPneumatic(relays, 3, 4, 25, 15);
                 var rightLegPneumatic = new McPitPneumatic(relays, 5, 6, 25, 15);
-                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(1, 1) });
+                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
 
                 core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
 

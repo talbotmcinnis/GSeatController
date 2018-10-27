@@ -84,13 +84,13 @@
 
             </Viewport3D>
         </Grid>
-        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="290" Value="{Binding Roll}" Maximum="180" Minimum="-180" LargeChange="15" SmallChange="1" TickFrequency="15"/>
-        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="305,31,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="269" Value="{Binding Pitch}" LargeChange="15" Maximum="180" Minimum="-180" SmallChange="1" TickFrequency="15"/>
-        <Slider x:Name="sliderGY" HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="290" Value="{Binding GY}" Maximum="8" Minimum="-2" SmallChange="0.25" TickFrequency="15"/>
+        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="290" Value="{Binding Roll}" Maximum="180" Minimum="-180" LargeChange="15" SmallChange="1" TickFrequency="15" AutoToolTipPlacement="TopLeft"/>
+        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="305,31,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="269" Value="{Binding Pitch}" LargeChange="15" Maximum="180" Minimum="-180" SmallChange="1" TickFrequency="15" AutoToolTipPlacement="TopLeft"/>
+        <Slider x:Name="sliderGY" HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="290" Value="{Binding GY}" Maximum="8" Minimum="-2" SmallChange="0.25" TickFrequency="15" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"/>
         <Label x:Name="label" Content="Roll" HorizontalAlignment="Left" Margin="140,328,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy" Content="Pitch" HorizontalAlignment="Left" Margin="298,0,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy1" Content="GY" HorizontalAlignment="Left" Margin="346,299,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sliderGZ" HorizontalAlignment="Left" Margin="374,177,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="123" Value="{Binding GZ}" Maximum="4" Minimum="-4" SmallChange="0.25" TickFrequency="15"/>
+        <Slider x:Name="sliderGZ" HorizontalAlignment="Left" Margin="374,177,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="123" Value="{Binding GZ}" Maximum="4" Minimum="-4" SmallChange="0.25" TickFrequency="15" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"/>
         <Label x:Name="label_Copy2" Content="GZ" HorizontalAlignment="Left" Margin="372,299,0,0" VerticalAlignment="Top"/>
 
         <CheckBox Content="R1" HorizontalAlignment="Left" Margin="603,305,0,0" VerticalAlignment="Top" IsChecked="{Binding R1}" IsEnabled="False"/>
