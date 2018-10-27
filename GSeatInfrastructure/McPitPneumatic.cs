@@ -12,13 +12,13 @@ namespace GSeatInfrastructure
         int inflationRelayNumber;
         int deflationRelayNumber;
 
-        public McPitPneumatic(IRelays relayController, int inflationRelayNumber, int deflationRelayNumber, double inflationRate, double deflationRate)
+        public McPitPneumatic(IRelays relayController, int inflationRelayNumber, int deflationRelayNumber, double inflationRatePctPerS, double deflationRatePctPerS)
         {
             this.relayController = relayController;
             this.inflationRelayNumber = inflationRelayNumber;
             this.deflationRelayNumber = deflationRelayNumber;
-            this.InflationRate = inflationRate;
-            this.DeflationRate = deflationRate;
+            this.InflationRatePctPerS = inflationRatePctPerS;
+            this.DeflationRatePctPerS = deflationRatePctPerS;
         }
 
         public async Task Inflate(double durationS)
@@ -39,8 +39,8 @@ namespace GSeatInfrastructure
             this.relayController.SetRelayState(relayNumber, false);
         }
 
-        public double InflationRate { get; private set; }
-        public double DeflationRate { get; private set; }
+        public double InflationRatePctPerS { get; private set; }
+        public double DeflationRatePctPerS { get; private set; }
 
     }
 }

@@ -47,6 +47,9 @@ namespace GSeatControllerCore
 
         public async Task SyncSeatToSim()
         {
+            if (EmergencyStop || isZeroing)
+                return;
+
             var sample = simulator.GetSample;
 
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
@@ -83,6 +86,40 @@ namespace GSeatControllerCore
             await this.ShoulderTPC.SetPressurePercent(desiredShoulderPressure);
             await this.LeftLegTPC.SetPressurePercent(desiredLeftLegPressure);
             await this.RightLegTPC.SetPressurePercent(desiredRightLegPressure);
+        }
+
+        bool emergencyStop = false;
+        public bool EmergencyStop
+        {
+            get { return emergencyStop; }
+            set {
+                if (value && !emergencyStop)
+                {
+                    Task.Factory.StartNew(() => this.shoulderPneumatic.Deflate(5));
+                    Task.Factory.StartNew(() => this.leftLegPneumatic.Deflate(5));
+                    Task.Factory.StartNew(() => this.rightLegPneumatic.Deflate(5));
+
+                }
+                emergencyStop = value;
+            }
+        }
+
+        bool isZeroing = false;
+        public async Task ZeroPneumatics()
+        {
+            isZeroing = true;
+
+            // Let all pneumatics drain, in parallel
+            var T1 = Task.Factory.StartNew(() => this.shoulderPneumatic.Deflate(5));
+            var T2 = Task.Factory.StartNew(() => this.leftLegPneumatic.Deflate(5));
+            var T3 = Task.Factory.StartNew(() => this.rightLegPneumatic.Deflate(5));
+
+            await Task.WhenAll(new Task[] { T1, T2, T3 });
+            this.ShoulderTPC.Reset();
+            this.LeftLegTPC.Reset();
+            this.RightLegTPC.Reset();
+
+            isZeroing = false;
         }
     }
 }

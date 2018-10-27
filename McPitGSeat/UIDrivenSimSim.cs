@@ -22,7 +22,7 @@ namespace McPitGSeat
             {
                 var result = new Sample();
                 result.Roll = vm.Roll;
-                result.Pitch = vm.Pitch;
+                result.Pitch = -vm.Pitch;
                 result.Acceleration = new System.Numerics.Vector3(0, vm.GY, vm.GZ);
                 return result;
             }

@@ -13,11 +13,11 @@ namespace GSeatControllerCore
         /// <summary>
         /// Percentage Inflation per second
         /// </summary>
-        double InflationRate { get; }
+        double InflationRatePctPerS { get; }
 
         /// <summary>
         /// Percentage Deflation per second
         /// </summary>
-        double DeflationRate { get; }
+        double DeflationRatePctPerS { get; }
     }
 }

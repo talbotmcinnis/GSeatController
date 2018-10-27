@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace McPitGSeat
@@ -24,7 +25,7 @@ namespace McPitGSeat
 
         public class GSeatVM : INotifyPropertyChanged
         {
-            GSeatControllerCore.GSeatControllerCore core;
+            public GSeatControllerCore.GSeatControllerCore core;
             DebugRelays relays;
 
             public GSeatVM()
@@ -32,35 +33,41 @@ namespace McPitGSeat
                 this.GY = 1.0f;
                 //var relays = new DenkoviRelays(0);
                 relays = new DebugRelays(6);
+                relays.OnRelayChanged += Relays_OnRelayChanged;
                 
                 //var simulator = new DCSA_10();
                 var simulator = new UIDrivenSimSim(this);
 
-                var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 50, 50);
+                var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 5, 5);
                 var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
-
-                var leftLegPneumatic = new McPitPneumatic(relays, 3, 4, 25, 15);
-                var rightLegPneumatic = new McPitPneumatic(relays, 5, 6, 25, 15);
+                var leftLegPneumatic = new McPitPneumatic(relays, 3, 4, .50, .25);
+                var rightLegPneumatic = new McPitPneumatic(relays, 5, 6, .50, .25);
                 var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
 
                 core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
 
                 var dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-                dispatcherTimer.Interval = TimeSpan.FromMilliseconds(100);
+                dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
                 dispatcherTimer.Tick += DispatcherTimer_Tick;
                 dispatcherTimer.Start();
+            }
+
+            private void Relays_OnRelayChanged(int relayNumber, bool state)
+            {
+                switch (relayNumber)
+                {
+                    case 1: this.R1 = state; break;
+                    case 2: this.R2 = state; break;
+                    case 3: this.R3 = state; break;
+                    case 4: this.R4 = state; break;
+                    case 5: this.R5 = state; break;
+                    case 6: this.R6 = state; break;
+                }
             }
 
             private async void DispatcherTimer_Tick(object sender, System.EventArgs e)
             {
                 await core.SyncSeatToSim();
-
-                this.R1 = relays.relayStates[1];
-                this.R2 = relays.relayStates[2];
-                this.R3 = relays.relayStates[3];
-                this.R4 = relays.relayStates[4];
-                this.R5 = relays.relayStates[5];
-                this.R6 = relays.relayStates[6];
 
                 this.ShoulderPressurePercent = core.ShoulderTPC.PressurePercent;
                 this.LeftLegPressurePercent = core.LeftLegTPC.PressurePercent;
@@ -97,8 +104,35 @@ namespace McPitGSeat
                 }
             }
 
-            public float GY { get; set; }
-            public float GZ { get; set; }
+            float gY;
+            public float GY
+            {
+                get
+                {
+                    return gY;
+                }
+
+                set
+                {
+                    gY = value;
+                    OnPropertyChanged("GY");
+                }
+            }
+
+            float gZ;
+            public float GZ
+            {
+                get
+                {
+                    return gZ;
+                }
+
+                set
+                {
+                    gZ = value;
+                    OnPropertyChanged("GZ");
+                }
+            }
 
             bool r1;
             public bool R1
@@ -215,6 +249,25 @@ namespace McPitGSeat
                 if (handler != null)
                     handler(this, new PropertyChangedEventArgs(name));
             }
+        }
+
+        private void resetSim_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = this.DataContext as GSeatVM;
+            vm.Pitch = 0;
+            vm.Roll = 0;
+            vm.GY = 1;
+            vm.GZ = 0;
+        }
+
+        private void btnReleasePneumatics_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as GSeatVM).core.EmergencyStop = true;
+        }
+
+        private async void btnZeroPneumatics_Click(object sender, RoutedEventArgs e)
+        {
+            await (this.DataContext as GSeatVM).core.ZeroPneumatics();
         }
     }
 }
