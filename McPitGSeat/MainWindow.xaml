@@ -95,15 +95,15 @@
 
         <CheckBox Content="R1" HorizontalAlignment="Left" Margin="603,305,0,0" VerticalAlignment="Top" IsChecked="{Binding R1}" IsEnabled="False"/>
         <CheckBox Content="R2" HorizontalAlignment="Left" Margin="603,203,0,0" VerticalAlignment="Top" IsChecked="{Binding R2}" IsEnabled="False"/>
-        <Slider HorizontalAlignment="Left" Margin="576,203,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding ShoulderPressurePercent}" Width="27" Orientation="Vertical" Height="120"/>
+        <Slider HorizontalAlignment="Left" Margin="576,203,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding ShoulderPressurePercent}" Width="27" Orientation="Vertical" Height="120" IsEnabled="False"/>
 
         <CheckBox Content="R3" HorizontalAlignment="Left" Margin="458,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R3}" IsEnabled="False"/>
         <CheckBox Content="R4" HorizontalAlignment="Left" Margin="515,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R4}" IsEnabled="False"/>
-        <Slider HorizontalAlignment="Left" Margin="458,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding LeftLegPressurePercent}" Width="90    "/>
+        <Slider HorizontalAlignment="Left" Margin="458,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding LeftLegPressurePercent}" Width="90    " IsEnabled="False"/>
 
         <CheckBox Content="R5" HorizontalAlignment="Left" Margin="624,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R5}" IsEnabled="False"/>
         <CheckBox Content="R6" HorizontalAlignment="Left" Margin="681,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R6}" IsEnabled="False"/>
-        <Slider HorizontalAlignment="Left" Margin="624,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding RightLegPressurePercent}" Width="90" IsDirectionReversed="True"/>
+        <Slider HorizontalAlignment="Left" Margin="624,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding RightLegPressurePercent}" Width="90" IsDirectionReversed="True" IsEnabled="False"/>
         <Button x:Name="btnResetSim" Content="Reset Sim" HorizontalAlignment="Left" Margin="416,16,0,0" VerticalAlignment="Top" Width="75" Click="resetSim_Click"/>
         <Button x:Name="btnReleasePneumatics" Content="Release Pneumatics" HorizontalAlignment="Left" Margin="603,10,0,0" VerticalAlignment="Top" Width="179" Height="43" Background="Red" FontWeight="ExtraBold" FontSize="16" BorderThickness="5" BorderBrush="#FFE8F300" Click="btnReleasePneumatics_Click"/>
         <Button x:Name="btnZeroPneumatics" Content="Zero Pneumatics" HorizontalAlignment="Left" Margin="496,16,0,0" VerticalAlignment="Top" Width="75" Click="btnZeroPneumatics_Click" />
