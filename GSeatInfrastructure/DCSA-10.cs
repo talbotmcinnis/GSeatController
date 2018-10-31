@@ -1,21 +1,48 @@
 ﻿using GSeatControllerCore;
 using System;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace GSeatInfrastructure
 {
     public class DCSA_10 : ISimulator
     {
+        UdpClient receiver;
+        Task receiveTask;
+        public DCSA_10(int port)
+        {
+            receiver = new UdpClient(port);
+            receiveTask = Task.Factory.StartNew(() => ReceiveTaskBody());
+        }
+
+        private async void ReceiveTaskBody()
+        {
+            while (true)
+            {
+                var result = await receiver.ReceiveAsync();
+                // TODO: Confirm this is UTF8?
+                lastDCSBody = System.Text.Encoding.UTF8.GetString(result.Buffer);
+            }
+        }
+
+        string lastDCSBody;
+
         public Sample GetSample
         {
             get
             {
+                if (lastDCSBody == null)
+                    return null;
+
                 var result = new Sample();
 
-                //var selfData = LogGetSelfData();
+                // TODO: Prase this.lastDCSBody into result parts
 
-                //result.Pitch = selfData.Pitch;
-                //result.Bank = selfData.Bank;
-                //result.Acceleration = LoGetAccelerationUnits();
+                result.Acceleration.X;
+                result.Acceleration.Y;
+                result.Acceleration.Z;
+                result.Pitch;
+                result.Roll;
 
                 return result;
             }
