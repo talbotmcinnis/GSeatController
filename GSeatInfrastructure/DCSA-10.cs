@@ -1,4 +1,5 @@
 ﻿using GSeatControllerCore;
+using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace GSeatInfrastructure
     {
         UdpClient receiver;
         Task receiveTask;
-        public DCSA_10(int port)
+        public DCSA_10(int port = 8804)
         {
             receiver = new UdpClient(port);
             receiveTask = Task.Factory.StartNew(() => ReceiveTaskBody());
@@ -20,31 +21,23 @@ namespace GSeatInfrastructure
             while (true)
             {
                 var result = await receiver.ReceiveAsync();
-                // TODO: Confirm this is UTF8?
-                lastDCSBody = System.Text.Encoding.UTF8.GetString(result.Buffer);
+                var payloadString = System.Text.Encoding.UTF8.GetString(result.Buffer);
+
+                var payload = JsonConvert.DeserializeObject<Sample>(payloadString);
+                // DCS gives radians, but my brain likes degrees
+                payload.Pitch = payload.Pitch * 180 / Math.PI;
+                payload.Roll = payload.Roll * 180 / Math.PI;
+                this.lastDCSPayload = payload;
             }
         }
 
-        string lastDCSBody;
+        Sample lastDCSPayload;
 
         public Sample GetSample
         {
             get
             {
-                if (lastDCSBody == null)
-                    return null;
-
-                var result = new Sample();
-
-                // TODO: Prase this.lastDCSBody into result parts
-
-                result.Acceleration.X;
-                result.Acceleration.Y;
-                result.Acceleration.Z;
-                result.Pitch;
-                result.Roll;
-
-                return result;
+                return lastDCSPayload;
             }
 
         }

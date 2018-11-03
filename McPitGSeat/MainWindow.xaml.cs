@@ -27,7 +27,7 @@ namespace McPitGSeat
         {
             public GSeatControllerCore.GSeatControllerCore core;
             DebugRelays relays;
-
+            ISimulator simulator;
             public GSeatVM()
             {
                 this.GY = 1.0f;
@@ -35,8 +35,8 @@ namespace McPitGSeat
                 relays = new DebugRelays(6);
                 relays.OnRelayChanged += Relays_OnRelayChanged;
                 
-                //var simulator = new DCSA_10();
-                var simulator = new UIDrivenSimSim(this);
+                simulator = new DCSA_10();
+                //simulator = new UIDrivenSimSim(this);
 
                 var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 5, 5);
                 var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
@@ -67,6 +67,17 @@ namespace McPitGSeat
 
             private async void DispatcherTimer_Tick(object sender, System.EventArgs e)
             {
+                if (simulator is DCSA_10)
+                {
+                    var sample = simulator.GetSample;
+                    if (sample != null)
+                    {
+                        this.Pitch = sample.Pitch;
+                        this.Roll = sample.Roll;
+                        this.GY = sample.Acceleration.Y;
+                    }
+                }
+
                 await core.SyncSeatToSim();
 
                 this.ShoulderPressurePercent = core.ShoulderTPC.PressurePercent;

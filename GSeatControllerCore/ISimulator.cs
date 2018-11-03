@@ -10,6 +10,8 @@ namespace GSeatControllerCore
         public double Pitch { get; set; }
         public double Roll { get; set; }
         public Vector3 Acceleration { get; set; }
+
+        public string Command { get; set; }
     }
 
     public interface ISimulator

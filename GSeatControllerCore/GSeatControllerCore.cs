@@ -52,6 +52,20 @@ namespace GSeatControllerCore
 
             var sample = simulator.GetSample;
 
+            if (sample == null)
+                return;
+
+            switch (sample.Command)
+            {
+                case "Start":
+                    this.EmergencyStop = false;
+                    await this.ZeroPneumatics();
+                    return;
+                case "Stop":
+                    this.EmergencyStop = true;
+                    return;
+            }
+
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
             // Roll pressure linear with orientation roll, reduced by Z-Gs
             var accelShoulder = sample.Acceleration.Z < 0 ? -sample.Acceleration.Z / 2 : 0;
