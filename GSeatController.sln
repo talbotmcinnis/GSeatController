@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSeatInfrastructure", "GSea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "McPitGSeat", "McPitGSeat\McPitGSeat.csproj", "{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "GSeatController Installer", "GSeatController Installer\GSeatController Installer.vdproj", "{0DCD5634-A954-41FF-8074-5140127D7D4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B59EA4B-78E8-4D82-A7A0-53DCCF036C67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DCD5634-A954-41FF-8074-5140127D7D4A}.Debug|Any CPU.ActiveCfg = Debug
+		{0DCD5634-A954-41FF-8074-5140127D7D4A}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
