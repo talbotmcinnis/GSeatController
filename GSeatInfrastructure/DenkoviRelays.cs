@@ -61,6 +61,10 @@ namespace GSeatInfrastructure
 
             uint receivedBytes = 0;
             myFtdiDevice.Write(relayState, 1, ref receivedBytes);
+            if (OnRelayChanged != null)
+                OnRelayChanged(relayNumber, state);
         }
+
+        public event RelayChangeHandler OnRelayChanged;
     }
 }

@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace GSeatInfrastructure
 {
-    public delegate void RelayChangeHandler(int relayNumber,bool state);
-
     public class DebugRelays : IRelays
     {
         public DebugRelays(int expectedRelays)

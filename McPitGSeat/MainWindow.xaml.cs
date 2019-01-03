@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Numerics;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace McPitGSeat
@@ -17,7 +16,7 @@ namespace McPitGSeat
         public MainWindow()
         {
             InitializeComponent();
-            
+
             var vm = new GSeatVM();
             this.DataContext = vm;
         }
@@ -26,23 +25,45 @@ namespace McPitGSeat
         public class GSeatVM : INotifyPropertyChanged
         {
             public GSeatControllerCore.GSeatControllerCore core;
-            DebugRelays relays;
             ISimulator simulator;
             public GSeatVM()
             {
                 this.GY = 1.0f;
-                //var relays = new DenkoviRelays(0);
-                relays = new DebugRelays(6);
-                relays.OnRelayChanged += Relays_OnRelayChanged;
-                
+#if DEBUG
+                var relays = new DebugRelays(6);
+                simulator = new UIDrivenSimSim(this);
+#else
+                var relays = new DenkoviRelays(0);
+                realys.Initialize();
                 simulator = new DCSA_10();
-                //simulator = new UIDrivenSimSim(this);
+#endif
 
-                var shoulderPneumatic = new McPitPneumatic(relays, 1, 2, 5, 5);
+                relays.OnRelayChanged += Relays_OnRelayChanged;
+
+                const double pistonDurationS = 0.2; // Guestmated for 20 PSI
+
+                var shoulderPneumatic = new McPitPneumatic(relays,
+                                                inflationRelayNumber: 2,
+                                                deflationRelayNumber: 1,
+                                                inflationRatePctPerS: 1.0 / pistonDurationS,
+                                                deflationRatePctPerS: 0.8 / pistonDurationS);
                 var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
-                var leftLegPneumatic = new McPitPneumatic(relays, 3, 4, .50, .25);
-                var rightLegPneumatic = new McPitPneumatic(relays, 5, 6, .50, .25);
-                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
+
+                const double legInflationDurationS = 2.3;   // 2.3s@20PSI
+                const double legDeflationDurationS = 3.3;   // 3.3s@20PSI
+
+                var leftLegPneumatic = new McPitPneumatic(relays,
+                    inflationRelayNumber: 6,
+                                                deflationRelayNumber: 4,
+                                                inflationRatePctPerS: 1.0/legInflationDurationS,
+                                                deflationRatePctPerS: 1.0/legDeflationDurationS);
+                var rightLegPneumatic = new McPitPneumatic(relays,
+                    inflationRelayNumber: 3,
+                                                deflationRelayNumber: 5,
+                                                inflationRatePctPerS: 1.0 / legInflationDurationS,
+                                                deflationRatePctPerS: 1.0 / legDeflationDurationS);
+                // Want a decent deadzone for horizontal roll, and then inverted flight is the same
+                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.40f, 0), new Vector2(1, 1) });
 
                 core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
 
@@ -75,6 +96,7 @@ namespace McPitGSeat
                         this.Pitch = sample.Pitch;
                         this.Roll = sample.Roll;
                         this.GY = sample.Acceleration.Y;
+                        this.GZ = sample.Acceleration.Z;
                     }
                 }
 
