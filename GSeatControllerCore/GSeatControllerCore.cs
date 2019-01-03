@@ -76,15 +76,25 @@ namespace GSeatControllerCore
                 gForceShoulder = (sample.Acceleration.Y - 1) / -2;  // Negative Gs
 
             var pitchShoulderForce = sample.Pitch < 0 ? -sample.Pitch / 90 : 0;
-            var desiredShoulderPressure = accelShoulder + gForceShoulder + pitchShoulderForce;
+            var rollShoulderForce = Math.Abs(sample.Roll) > 120 ? (Math.Abs(sample.Roll)-120)/(180-120): 0;
+            var desiredShoulderPressure = accelShoulder + gForceShoulder + pitchShoulderForce + rollShoulderForce;
 
             var normalizedRoll = sample.Roll;
             if (normalizedRoll > 90)
                 normalizedRoll = 180 - normalizedRoll;
             else if (normalizedRoll < -90)
                 normalizedRoll = -180 - normalizedRoll;
+
             var desiredLeftLegPressure = normalizedRoll < 0 ? -normalizedRoll/ 90 : 0;
             var desiredRightLegPressure = normalizedRoll > 0 ? normalizedRoll / 90 : 0;
+
+            // If high/low pitch, roll shouldn't have an effect
+            const int pitchRollDeadzone = 75;
+            if (Math.Abs(sample.Pitch) > pitchRollDeadzone)
+            {
+                desiredLeftLegPressure -= (Math.Abs(sample.Pitch) - pitchRollDeadzone) /(90-pitchRollDeadzone);
+                desiredRightLegPressure -= (Math.Abs(sample.Pitch) - pitchRollDeadzone) / (90 -pitchRollDeadzone);
+            }
 
             // Translate the raw data through a transfer curve
             desiredShoulderPressure = shoulderTransferCurve.Transfer(desiredShoulderPressure);
