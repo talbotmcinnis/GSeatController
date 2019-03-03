@@ -34,7 +34,7 @@ namespace McPitGSeat
                 simulator = new UIDrivenSimSim(this);
 #else
                 var relays = new DenkoviRelays(0);
-                realys.Initialize();
+                relays.Initialize();
                 simulator = new DCSA_10();
 #endif
 
