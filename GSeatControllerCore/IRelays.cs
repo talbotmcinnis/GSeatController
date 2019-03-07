@@ -6,7 +6,7 @@ namespace GSeatControllerCore
 {
     public delegate void RelayChangeHandler(int relayNumber, bool state);
 
-    public interface IRelays
+    public interface IRelays : IDisposable
     {
         void SetRelayState(int relayNumber, bool state);
 

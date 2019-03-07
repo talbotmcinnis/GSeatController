@@ -26,7 +26,7 @@ namespace GSeatControllerCore
             ISingleAxisPneumatic leftLegPneumatic,
             ISingleAxisPneumatic rightLegPneumatic,
             TransferCurve shoulderTransferCurve,
-            TransferCurve legTransferCurve )
+            TransferCurve legTransferCurve)
         {
             this.simulator = simulator;
             this.shoulderPneumatic = shoulderPneumatic;
@@ -64,6 +64,28 @@ namespace GSeatControllerCore
                 case "Stop":
                     this.EmergencyStop = true;
                     return;
+            }
+
+            if (override_leftLeg != null || override_rightLeg != null || override_shoulder != null)
+            {
+                System.Diagnostics.Debug.WriteLine("Applying override");
+                // Apply the calculated pressures
+                if(override_leftLeg == OverrideMode.inflate)
+                    await this.LeftLegTPC.SetPressurePercent(1.0);
+                else if( override_leftLeg == OverrideMode.deflate)
+                    await this.LeftLegTPC.SetPressurePercent(0);
+
+                if (override_shoulder == OverrideMode.inflate)
+                    await this.ShoulderTPC.SetPressurePercent(1.0);
+                else if (override_shoulder == OverrideMode.deflate)
+                    await this.ShoulderTPC.SetPressurePercent(0);
+
+                if (override_rightLeg == OverrideMode.inflate)
+                    await this.RightLegTPC.SetPressurePercent(1.0);
+                else if (override_rightLeg == OverrideMode.deflate)
+                    await this.RightLegTPC.SetPressurePercent(0);
+
+                return;
             }
 
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
@@ -110,6 +132,39 @@ namespace GSeatControllerCore
             await this.ShoulderTPC.SetPressurePercent(desiredShoulderPressure);
             await this.LeftLegTPC.SetPressurePercent(desiredLeftLegPressure);
             await this.RightLegTPC.SetPressurePercent(desiredRightLegPressure);
+        }
+
+        enum OverrideMode
+        {
+            inflate,
+            deflate
+        };
+
+        OverrideMode? override_leftLeg = null;
+        OverrideMode? override_shoulder = null;
+        OverrideMode? override_rightLeg = null;
+        public void SetOverrides(bool leftLegInflate, bool leftLegDeflate, bool shoulderInflate, bool shoulderDeflate, bool rightLegInflate, bool rightLegDeflate)
+        {
+            if (leftLegDeflate)
+                override_leftLeg = OverrideMode.deflate;
+            else if (leftLegInflate)
+                override_leftLeg = OverrideMode.inflate;
+            else
+                override_leftLeg = null;
+
+            if (shoulderDeflate)
+                override_shoulder = OverrideMode.deflate;
+            else if (shoulderInflate)
+                override_shoulder = OverrideMode.inflate;
+            else
+                override_shoulder = null;
+
+            if (rightLegDeflate)
+                override_rightLeg = OverrideMode.deflate;
+            else if (rightLegInflate)
+                override_rightLeg = OverrideMode.inflate;
+            else
+                override_rightLeg = null;
         }
 
         bool emergencyStop = false;

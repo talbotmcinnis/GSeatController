@@ -17,10 +17,7 @@ namespace GSeatInfrastructure
             this.deviceIndex = deviceIndex;
 
             relayState[0] = 0;
-        }
 
-        public void Initialize()
-        {
             var status = myFtdiDevice.OpenByIndex(deviceIndex); // TODO: Consider by serial number or something more... sticky
             if (status != FTDI.FT_STATUS.FT_OK)
                 throw new ApplicationException($"Error opening device: {status.ToString()}");
@@ -63,6 +60,12 @@ namespace GSeatInfrastructure
             myFtdiDevice.Write(relayState, 1, ref receivedBytes);
             if (OnRelayChanged != null)
                 OnRelayChanged(relayNumber, state);
+        }
+
+        public void Dispose()
+        {
+            this.myFtdiDevice.Close();
+            this.myFtdiDevice = null;
         }
 
         public event RelayChangeHandler OnRelayChanged;

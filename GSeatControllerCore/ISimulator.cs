@@ -14,7 +14,7 @@ namespace GSeatControllerCore
         public string Command { get; set; }
     }
 
-    public interface ISimulator
+    public interface ISimulator : IDisposable
     {
         Sample GetSample { get; }
     }

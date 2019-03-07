@@ -5,107 +5,186 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:McPitGSeat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="386.047" Width="800">
-    <Grid Margin="0,0,0,3">
-        <Grid Width="300" Height="300" HorizontalAlignment="Left" VerticalAlignment="Top" Background="Black">
-            <Viewport3D Name="myViewport"  >
+        Title="MainWindow" Height="367.047" Width="449" ResizeMode="NoResize" LocationChanged="Window_LocationChanged">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontFamily" Value="Segoe UI Black" />
+        </Style>
+        <Style x:Key="Button.Hoverless" TargetType="{x:Type ButtonBase}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border Name="border"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="Selector.IsSelected" Value="False" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="#FFBEE6FD" />
+                            </MultiTrigger>
 
-                <!-- Add a camera. -->
-                <Viewport3D.Camera>
-                    <PerspectiveCamera 
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True" />
+                                    <Condition Property="Selector.IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="#BB90EE90" />
+                            </MultiTrigger>
+
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="False" />
+                                    <Condition Property="Selector.IsSelected" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Background" Value="LightGreen" />
+                            </MultiTrigger>
+
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Opacity" Value="0.95" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid  Background="Black">
+        <Grid Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top" Background="DarkGray">
+            <Border BorderBrush="LightGray" BorderThickness="5">
+                <Viewport3D Name="myViewport"  >
+
+                    <!-- Add a camera. -->
+                    <Viewport3D.Camera>
+                        <PerspectiveCamera 
 						FarPlaneDistance="20" 
 						LookDirection="0,0,1" 
 						UpDirection="0,1,0" 
 						NearPlaneDistance="1" 
 						Position="0,0,-3" 
 						FieldOfView="45" />
-                </Viewport3D.Camera>
+                    </Viewport3D.Camera>
 
-                <!-- Add models. -->
-                <Viewport3D.Children>
+                    <!-- Add models. -->
+                    <Viewport3D.Children>
 
-                    <ModelVisual3D>
-                        <ModelVisual3D.Content>
+                        <ModelVisual3D>
+                            <ModelVisual3D.Content>
 
-                            <Model3DGroup>
-                                <Model3DGroup.Children>
+                                <Model3DGroup>
+                                    <Model3DGroup.Children>
 
-                                    <!-- Lights, MeshGeometry3D and DiffuseMaterial objects are added to the ModelVisual3D. -->
-                                    <PointLight Color="#FFFFFFFF" Position="10,0,0" />
-                                    <PointLight Color="#FFFFFFFF" Position="-10,0,0" />
-                                    <PointLight Color="#FFFFFFFF" Position="0,-10,0" />
-                                    <PointLight Color="#FFFFFFFF" Position="0,10,0" />
+                                        <!-- Lights, MeshGeometry3D and DiffuseMaterial objects are added to the ModelVisual3D. -->
+                                        <PointLight Color="#FFFFFFFF" Position="10,0,0" />
+                                        <PointLight Color="#FFFFFFFF" Position="-10,0,0" />
+                                        <PointLight Color="#FFFFFFFF" Position="0,-10,0" />
+                                        <PointLight Color="#FFFFFFFF" Position="0,10,0" />
 
 
-                                    <!-- Define a red cone. -->
-                                    <GeometryModel3D>
+                                        <!-- Define a cone. -->
+                                        <GeometryModel3D>
 
-                                        <GeometryModel3D.Geometry>
-                                            <MeshGeometry3D 
+                                            <GeometryModel3D.Geometry>
+                                                <MeshGeometry3D 
     Positions="0.293893 -0.5 0.404509  0.475528 -0.5 0.154509  0 0.5 0  0.475528 -0.5 0.154509  0 0.5 0  0 0.5 0  0.475528 -0.5 0.154509  0.475528 -0.5 -0.154509  0 0.5 0  0.475528 -0.5 -0.154509  0 0.5 0  0 0.5 0  0.475528 -0.5 -0.154509  0.293893 -0.5 -0.404509  0 0.5 0  0.293893 -0.5 -0.404509  0 0.5 0  0 0.5 0  0.293893 -0.5 -0.404509  0 -0.5 -0.5  0 0.5 0  0 -0.5 -0.5  0 0.5 0  0 0.5 0  0 -0.5 -0.5  -0.293893 -0.5 -0.404509  0 0.5 0  -0.293893 -0.5 -0.404509  0 0.5 0  0 0.5 0  -0.293893 -0.5 -0.404509  -0.475528 -0.5 -0.154509  0 0.5 0  -0.475528 -0.5 -0.154509  0 0.5 0  0 0.5 0  -0.475528 -0.5 -0.154509  -0.475528 -0.5 0.154509  0 0.5 0  -0.475528 -0.5 0.154509  0 0.5 0  0 0.5 0  -0.475528 -0.5 0.154509  -0.293892 -0.5 0.404509  0 0.5 0  -0.293892 -0.5 0.404509  0 0.5 0  0 0.5 0  -0.293892 -0.5 0.404509  0 -0.5 0.5  0 0.5 0  0 -0.5 0.5  0 0.5 0  0 0.5 0  0 -0.5 0.5  0.293893 -0.5 0.404509  0 0.5 0  0.293893 -0.5 0.404509  0 0.5 0  0 0.5 0  " 
     Normals="0.7236065,0.4472139,0.5257313  0.2763934,0.4472138,0.8506507  0.5308242,0.4294462,0.7306172  0.2763934,0.4472138,0.8506507  0,0.4294458,0.9030925  0.5308242,0.4294462,0.7306172  0.2763934,0.4472138,0.8506507  -0.2763934,0.4472138,0.8506507  0,0.4294458,0.9030925  -0.2763934,0.4472138,0.8506507  -0.5308242,0.4294462,0.7306172  0,0.4294458,0.9030925  -0.2763934,0.4472138,0.8506507  -0.7236065,0.4472139,0.5257313  -0.5308242,0.4294462,0.7306172  -0.7236065,0.4472139,0.5257313  -0.858892,0.429446,0.279071  -0.5308242,0.4294462,0.7306172  -0.7236065,0.4472139,0.5257313  -0.8944269,0.4472139,0  -0.858892,0.429446,0.279071  -0.8944269,0.4472139,0  -0.858892,0.429446,-0.279071  -0.858892,0.429446,0.279071  -0.8944269,0.4472139,0  -0.7236065,0.4472139,-0.5257313  -0.858892,0.429446,-0.279071  -0.7236065,0.4472139,-0.5257313  -0.5308242,0.4294462,-0.7306172  -0.858892,0.429446,-0.279071  -0.7236065,0.4472139,-0.5257313  -0.2763934,0.4472138,-0.8506507  -0.5308242,0.4294462,-0.7306172  -0.2763934,0.4472138,-0.8506507  0,0.4294458,-0.9030925  -0.5308242,0.4294462,-0.7306172  -0.2763934,0.4472138,-0.8506507  0.2763934,0.4472138,-0.8506507  0,0.4294458,-0.9030925  0.2763934,0.4472138,-0.8506507  0.5308249,0.4294459,-0.7306169  0,0.4294458,-0.9030925  0.2763934,0.4472138,-0.8506507  0.7236068,0.4472141,-0.5257306  0.5308249,0.4294459,-0.7306169  0.7236068,0.4472141,-0.5257306  0.8588922,0.4294461,-0.27907  0.5308249,0.4294459,-0.7306169  0.7236068,0.4472141,-0.5257306  0.8944269,0.4472139,0  0.8588922,0.4294461,-0.27907  0.8944269,0.4472139,0  0.858892,0.429446,0.279071  0.8588922,0.4294461,-0.27907  0.8944269,0.4472139,0  0.7236065,0.4472139,0.5257313  0.858892,0.429446,0.279071  0.7236065,0.4472139,0.5257313  0.5308242,0.4294462,0.7306172  0.858892,0.429446,0.279071  "                   TriangleIndices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 " />
-                                        </GeometryModel3D.Geometry>
+                                            </GeometryModel3D.Geometry>
 
-                                        <GeometryModel3D.Material>
-                                            <DiffuseMaterial>
-                                                <DiffuseMaterial.Brush>
-                                                    <SolidColorBrush 
-                            Color="Red" 
+                                            <GeometryModel3D.Material>
+                                                <DiffuseMaterial>
+                                                    <DiffuseMaterial.Brush>
+                                                        <SolidColorBrush 
+                            Color="DarkGreen" 
                             Opacity="1.0"/>
-                                                </DiffuseMaterial.Brush>
-                                            </DiffuseMaterial>
-                                        </GeometryModel3D.Material>
+                                                    </DiffuseMaterial.Brush>
+                                                </DiffuseMaterial>
+                                            </GeometryModel3D.Material>
 
-                                        <GeometryModel3D.Transform>
-                                            <Transform3DGroup>
-                                                <Transform3DGroup.Children>
-                                                    <RotateTransform3D>
-                                                        <RotateTransform3D.Rotation>
-                                                            <AxisAngleRotation3D x:Name="myRollRotation" Axis="0,0,1" Angle="{Binding Roll}" />
-                                                        </RotateTransform3D.Rotation>
-                                                    </RotateTransform3D>
-                                                    <RotateTransform3D>
-                                                        <RotateTransform3D.Rotation>
-                                                            <AxisAngleRotation3D x:Name="myPitchRotation" Axis="1,0,0" Angle="{Binding Pitch}" />
-                                                        </RotateTransform3D.Rotation>
-                                                    </RotateTransform3D>
-                                                </Transform3DGroup.Children>
-                                            </Transform3DGroup>
-                                        </GeometryModel3D.Transform>
-                                    </GeometryModel3D>
-                                </Model3DGroup.Children>
-                            </Model3DGroup>
+                                            <GeometryModel3D.Transform>
+                                                <Transform3DGroup>
+                                                    <Transform3DGroup.Children>
+                                                        <RotateTransform3D>
+                                                            <RotateTransform3D.Rotation>
+                                                                <AxisAngleRotation3D x:Name="myRollRotation" Axis="0,0,1" Angle="{Binding Roll}" />
+                                                            </RotateTransform3D.Rotation>
+                                                        </RotateTransform3D>
+                                                        <RotateTransform3D>
+                                                            <RotateTransform3D.Rotation>
+                                                                <AxisAngleRotation3D x:Name="myPitchRotation" Axis="1,0,0" Angle="{Binding Pitch}" />
+                                                            </RotateTransform3D.Rotation>
+                                                        </RotateTransform3D>
+                                                    </Transform3DGroup.Children>
+                                                </Transform3DGroup>
+                                            </GeometryModel3D.Transform>
+                                        </GeometryModel3D>
+                                    </Model3DGroup.Children>
+                                </Model3DGroup>
 
-                        </ModelVisual3D.Content>
+                            </ModelVisual3D.Content>
 
-                    </ModelVisual3D>
+                        </ModelVisual3D>
 
-                </Viewport3D.Children>
+                    </Viewport3D.Children>
 
-            </Viewport3D>
+                </Viewport3D>
+            </Border>
+
         </Grid>
-        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Width="290" Value="{Binding Roll}" Maximum="180" Minimum="-180" LargeChange="15" SmallChange="1" TickFrequency="15" AutoToolTipPlacement="TopLeft"/>
-        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="305,31,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="269" Value="{Binding Pitch}" LargeChange="15" Maximum="180" Minimum="-180" SmallChange="1" TickFrequency="15" AutoToolTipPlacement="TopLeft"/>
-        <Slider x:Name="sliderGY" HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="290" Value="{Binding GY}" Maximum="8" Minimum="-2" SmallChange="0.25" TickFrequency="15" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"/>
-        <Label x:Name="label" Content="Roll" HorizontalAlignment="Left" Margin="140,328,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy" Content="Pitch" HorizontalAlignment="Left" Margin="298,0,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_Copy1" Content="GY" HorizontalAlignment="Left" Margin="346,299,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sliderGZ" HorizontalAlignment="Left" Margin="374,177,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="123" Value="{Binding GZ}" Maximum="4" Minimum="-4" SmallChange="0.25" TickFrequency="15" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"/>
-        <Label x:Name="label_Copy2" Content="GZ" HorizontalAlignment="Left" Margin="372,299,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sliderRoll" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Width="140" Value="{Binding Roll}" Maximum="180" Minimum="-180" LargeChange="15" SmallChange="1" TickFrequency="15" AutoToolTipPlacement="TopLeft"/>
+        <Slider x:Name="sliderPitch" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="138" Value="{Binding Pitch}" LargeChange="15" Maximum="180" Minimum="-180" SmallChange="1" TickFrequency="15" AutoToolTipPlacement="TopLeft"/>
+        <Slider x:Name="sliderGY" HorizontalAlignment="Left" Margin="10,172,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="98" Value="{Binding GY}" Maximum="8" Minimum="-2" SmallChange="0.25" TickFrequency="15" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"/>
+        <Label x:Name="label" Content="Roll" HorizontalAlignment="Left" Margin="60,178,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="Pitch" HorizontalAlignment="Left" Margin="150,147,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy1" Content="GY" HorizontalAlignment="Left" Margin="4,272,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sliderGZ" HorizontalAlignment="Left" Margin="35,172,0,0" VerticalAlignment="Top" Width="20" Orientation="Vertical" Height="98" Value="{Binding GZ}" Maximum="4" Minimum="-4" SmallChange="0.25" TickFrequency="15" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1"/>
+        <Label x:Name="label_Copy2" Content="GZ" HorizontalAlignment="Left" Margin="30,272,0,0" VerticalAlignment="Top"/>
+        <Slider HorizontalAlignment="Left" Margin="222,183,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding ShoulderPressurePercent}" Width="27" Orientation="Vertical" Height="103" IsEnabled="False"/>
+        <Slider HorizontalAlignment="Left" Margin="116,183,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding LeftLegPressurePercent}" Width="24" Orientation="Vertical" IsEnabled="False" Height="103"/>
+        <Slider HorizontalAlignment="Left" Margin="335,183,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding RightLegPressurePercent}" Width="29" Orientation="Vertical" IsEnabled="False" Height="103"/>
+        <Button x:Name="btnEmergencyStop" Content="Emergency Stop" HorizontalAlignment="Left" Margin="266,55,0,0" VerticalAlignment="Top" Width="150" Height="95" Background="Red" FontWeight="ExtraBold" FontSize="16" BorderThickness="5" BorderBrush="#FFE8F300" Click="BtnEmergencyStop_Click"
+               />
+        <Image x:Name="panel_backplate_top_left_png" Source="panel-backplate-top-left.png" Width="35" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+        <Image x:Name="panel_backplate_top_right_png" Source="panel-backplate-top-right.png" Width="35" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+        <Image x:Name="panel_backplate_bottom_left_png" Source="panel-backplate-bottom-left.png" Width="35" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <Image x:Name="panel_backplate_bottom_right_png" Source="panel-backplate-bottom-right.png" Width="35" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <CheckBox Content="R1" HorizontalAlignment="Left" Margin="603,305,0,0" VerticalAlignment="Top" IsChecked="{Binding R1}" IsEnabled="False"/>
-        <CheckBox Content="R2" HorizontalAlignment="Left" Margin="603,203,0,0" VerticalAlignment="Top" IsChecked="{Binding R2}" IsEnabled="False"/>
-        <Slider HorizontalAlignment="Left" Margin="576,203,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding ShoulderPressurePercent}" Width="27" Orientation="Vertical" Height="120" IsEnabled="False"/>
+        <ToggleButton Background="Transparent" x:Name="EnableToggle" Click="EnableToggle_Click" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="180,10,0,0" Height="137" Width="67" BorderBrush="{x:Null}">
+            <Grid>
+                <Image x:Name="round_locking_down_png"  Source="round-locking-down.png" Stretch="Fill" />
+                <Image x:Name="round_locking_up_png" Source="round-locking-up.png" Stretch="Fill" Visibility="Hidden"/>
+                <Label x:Name="label1" Content="ON" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.31,0.308" />
+            </Grid>
+        </ToggleButton>
+        <Label x:Name="label_Copy3" Content="LL" HorizontalAlignment="Left" Margin="116,291,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy4" Content="RL" HorizontalAlignment="Left" Margin="335,291,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy5" Content="SH" HorizontalAlignment="Left" Margin="221,291,0,0" VerticalAlignment="Top"/>
 
-        <CheckBox Content="R3" HorizontalAlignment="Left" Margin="458,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R3}" IsEnabled="False"/>
-        <CheckBox Content="R4" HorizontalAlignment="Left" Margin="515,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R4}" IsEnabled="False"/>
-        <Slider HorizontalAlignment="Left" Margin="458,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding LeftLegPressurePercent}" Width="90    " IsEnabled="False"/>
+        <StackPanel HorizontalAlignment="Left" Margin="145,194,0,19" Width="41" >
+            <Image x:Name="Override_LeftLegInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+            <Image x:Name="Override_LeftLegDeflate" Source="red-push.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+        </StackPanel>
 
-        <CheckBox Content="R5" HorizontalAlignment="Left" Margin="624,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R5}" IsEnabled="False"/>
-        <CheckBox Content="R6" HorizontalAlignment="Left" Margin="681,94,0,0" VerticalAlignment="Top" IsChecked="{Binding R6}" IsEnabled="False"/>
-        <Slider HorizontalAlignment="Left" Margin="624,130,0,0" VerticalAlignment="Top" Maximum="1" LargeChange="0.1" SmallChange="0.01" TickFrequency="0.25" Value="{Binding RightLegPressurePercent}" Width="90" IsDirectionReversed="True" IsEnabled="False"/>
-        <Button x:Name="btnResetSim" Content="Reset Sim" HorizontalAlignment="Left" Margin="416,16,0,0" VerticalAlignment="Top" Width="75" Click="resetSim_Click"/>
-        <Button x:Name="btnReleasePneumatics" Content="Release Pneumatics" HorizontalAlignment="Left" Margin="603,10,0,0" VerticalAlignment="Top" Width="179" Height="43" Background="Red" FontWeight="ExtraBold" FontSize="16" BorderThickness="5" BorderBrush="#FFE8F300" Click="btnReleasePneumatics_Click"/>
-        <Button x:Name="btnZeroPneumatics" Content="Zero Pneumatics" HorizontalAlignment="Left" Margin="496,16,0,0" VerticalAlignment="Top" Width="75" Click="btnZeroPneumatics_Click" />
+        <StackPanel HorizontalAlignment="Left" Margin="249,194,0,19" Width="41" >
+            <Image x:Name="Override_ShoulderInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+            <Image x:Name="Override_ShoulderDeflate" Source="red-push.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Left" Margin="364,194,0,29" Width="41" >
+            <Image x:Name="Override_RightLegInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+            <Image x:Name="Override_RighgtLegDeflate" Source="red-push.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+        </StackPanel>
+        <RadioButton Content="" HorizontalAlignment="Left" Margin="158,174,0,0" VerticalAlignment="Top" IsChecked="{Binding R6}" Foreground="#FF17FF00" IsEnabled="False"/>
+        <RadioButton Content="" HorizontalAlignment="Left" Margin="158,270,0,0" VerticalAlignment="Top" IsChecked="{Binding R4}" Foreground="#FF17FF00" IsEnabled="False"/>
+        <RadioButton Content="" HorizontalAlignment="Left" Margin="262,174,0,0" VerticalAlignment="Top" IsChecked="{Binding R2}" Foreground="#FF17FF00" IsEnabled="False"/>
+        <RadioButton Content="" HorizontalAlignment="Left" Margin="262,270,0,0" VerticalAlignment="Top" IsChecked="{Binding R1}" Foreground="#FF17FF00" IsEnabled="False"/>
+        <RadioButton Content="" HorizontalAlignment="Left" Margin="377,174,0,0" VerticalAlignment="Top" IsChecked="{Binding R3}" Foreground="#FF17FF00" IsEnabled="False"/>
+        <RadioButton Content="" HorizontalAlignment="Left" Margin="377,270,0,0" VerticalAlignment="Top" IsChecked="{Binding R5}" Foreground="#FF17FF00" IsEnabled="False"/>
     </Grid>
 </Window>

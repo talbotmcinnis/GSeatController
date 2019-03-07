@@ -33,18 +33,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_AB8255649FC886A17FA8BC0816776D87"
-        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_AB8255649FC886A17FA8BC0816776D87"
-        "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_B586F512CFC82AB8933B29E1760C9026"
         "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
@@ -63,6 +51,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FB8E3BE416A0EAC15507859965A6FF97"
+        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FB8E3BE416A0EAC15507859965A6FF97"
+        "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_FBCDB6714FFB6A865D1EC9EAEE0C092B"
         "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
@@ -70,13 +70,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FBCDB6714FFB6A865D1EC9EAEE0C092B"
+        "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FB8E3BE416A0EAC15507859965A6FF97"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -94,13 +100,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_AB8255649FC886A17FA8BC0816776D87"
+        "OwnerKey" = "8:_FBCDB6714FFB6A865D1EC9EAEE0C092B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -121,6 +121,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -137,6 +145,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -228,20 +244,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AB8255649FC886A17FA8BC0816776D87"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B586F512CFC82AB8933B29E1760C9026"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:GSeatControllerCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AB8255649FC886A17FA8BC0816776D87"
+                    "_B586F512CFC82AB8933B29E1760C9026"
                     {
-                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Name" = "8:GSeatControllerCore.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:Newtonsoft.Json.dll"
+            "SourcePath" = "8:GSeatControllerCore.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
@@ -259,20 +275,20 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B586F512CFC82AB8933B29E1760C9026"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB8E3BE416A0EAC15507859965A6FF97"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GSeatControllerCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B586F512CFC82AB8933B29E1760C9026"
+                    "_FB8E3BE416A0EAC15507859965A6FF97"
                     {
-                    "Name" = "8:GSeatControllerCore.dll"
+                    "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:GSeatControllerCore.dll"
+            "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
@@ -377,15 +393,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GSeat Controller"
-        "ProductCode" = "8:{F7339798-20C6-464B-845F-5691DC2452F1}"
-        "PackageCode" = "8:{2FBBBCB6-4213-4C38-8A41-D169FD03E355}"
+        "ProductCode" = "8:{EC28849A-2E93-419B-B427-724F4555E43E}"
+        "PackageCode" = "8:{64C75BA3-DF93-42CA-959F-F6150DF04E45}"
         "UpgradeCode" = "8:{363171FA-AD63-42A0-A9DC-DD2F28DE624A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.1.0"
         "Manufacturer" = "8:Puma"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

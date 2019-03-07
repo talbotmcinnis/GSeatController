@@ -20,15 +20,31 @@ namespace GSeatInfrastructure
         {
             while (true)
             {
-                var result = await receiver.ReceiveAsync();
-                var payloadString = System.Text.Encoding.UTF8.GetString(result.Buffer);
+                try
+                {
+                    var result = await receiver.ReceiveAsync();
+                    var payloadString = System.Text.Encoding.UTF8.GetString(result.Buffer);
 
-                var payload = JsonConvert.DeserializeObject<Sample>(payloadString);
-                // DCS gives radians, but my brain likes degrees
-                payload.Pitch = payload.Pitch * 180 / Math.PI;
-                payload.Roll = payload.Roll * 180 / Math.PI;
-                this.lastDCSPayload = payload;
+                    var payload = JsonConvert.DeserializeObject<Sample>(payloadString);
+                    // DCS gives radians, but my brain likes degrees
+                    payload.Pitch = payload.Pitch * 180 / Math.PI;
+                    payload.Roll = payload.Roll * 180 / Math.PI;
+                    this.lastDCSPayload = payload;
+                }
+                catch {
+                    if (disposeNow)
+                        break;
+                }
             }
+        }
+
+        bool disposeNow = false;
+        public void Dispose()
+        {
+            this.disposeNow = true;
+            this.receiver.Close();
+            this.receiver.Dispose();
+
         }
 
         Sample lastDCSPayload;

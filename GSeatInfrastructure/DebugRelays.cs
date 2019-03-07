@@ -25,6 +25,10 @@ namespace GSeatInfrastructure
                 OnRelayChanged(relayNumber, state);
         }
 
+        public void Dispose()
+        {
+        }
+
         public Dictionary<int, bool> relayStates = new Dictionary<int, bool>();
 
         public event RelayChangeHandler OnRelayChanged;

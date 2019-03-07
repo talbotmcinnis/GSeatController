@@ -10,8 +10,8 @@ namespace McPitGSeat
 {
     class UIDrivenSimSim : ISimulator
     {
-        GSeatVM vm;
-        public UIDrivenSimSim(GSeatVM vm)
+        GSeatViewModel vm;
+        public UIDrivenSimSim(GSeatViewModel vm)
         {
             this.vm = vm;
         }
@@ -26,6 +26,10 @@ namespace McPitGSeat
                 result.Acceleration = new System.Numerics.Vector3(0, vm.GY, vm.GZ);
                 return result;
             }
+        }
+
+        public void Dispose()
+        {
         }
     }
 }

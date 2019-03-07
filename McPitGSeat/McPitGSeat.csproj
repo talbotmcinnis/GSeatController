@@ -57,6 +57,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GSeatViewModel.cs" />
     <Compile Include="UIDrivenSimSim.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -106,6 +107,33 @@
       <Project>{cf5f7a4a-e1f2-48c1-8c27-c9b756df1f9f}</Project>
       <Name>GSeatInfrastructure</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="panel-backplate-top.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="panel-backplate-top-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="panel-backplate-top-right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="panel-backplate-bottom-left.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="panel-backplate-bottom-right.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="round-locking-down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="round-locking-up.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="tactile-dark-round.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="red-push.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
