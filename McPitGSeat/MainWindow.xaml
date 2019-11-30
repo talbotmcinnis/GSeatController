@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:McPitGSeat"
         mc:Ignorable="d"
-        Title="MainWindow" Height="367.047" Width="449" ResizeMode="NoResize" LocationChanged="Window_LocationChanged">
+        Title="McPit GSeat Controller" Height="367.047" Width="449" ResizeMode="NoResize" LocationChanged="Window_LocationChanged">
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White" />
@@ -167,18 +167,18 @@
         <Label x:Name="label_Copy5" Content="SH" HorizontalAlignment="Left" Margin="221,291,0,0" VerticalAlignment="Top"/>
 
         <StackPanel HorizontalAlignment="Left" Margin="145,194,0,19" Width="41" >
-            <Image x:Name="Override_LeftLegInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
-            <Image x:Name="Override_LeftLegDeflate" Source="red-push.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+            <Image x:Name="Override_LeftLegInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" MouseDown="Override_TouchDown" MouseUp="Override_TouchUp"/>
+            <Image x:Name="Override_LeftLegDeflate" Source="red-push.png" Width="35" Stretch="Fill" MouseDown="Override_TouchDown" MouseUp="Override_TouchUp"/>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Left" Margin="249,194,0,19" Width="41" >
-            <Image x:Name="Override_ShoulderInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
-            <Image x:Name="Override_ShoulderDeflate" Source="red-push.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+            <Image x:Name="Override_ShoulderInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" MouseDown="Override_TouchDown" MouseUp="Override_TouchUp"/>
+            <Image x:Name="Override_ShoulderDeflate" Source="red-push.png" Width="35" Stretch="Fill" MouseDown="Override_TouchDown" MouseUp="Override_TouchUp"/>
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Left" Margin="364,194,0,29" Width="41" >
-            <Image x:Name="Override_RightLegInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
-            <Image x:Name="Override_RighgtLegDeflate" Source="red-push.png" Width="35" Stretch="Fill" TouchDown="Override_TouchDown" TouchUp="Override_TouchUp"/>
+            <Image x:Name="Override_RightLegInflate" Source="tactile-dark-round.png" Width="35" Stretch="Fill" MouseDown="Override_TouchDown" MouseUp="Override_TouchUp"/>
+            <Image x:Name="Override_RighgtLegDeflate" Source="red-push.png" Width="35" Stretch="Fill" MouseDown="Override_TouchDown" MouseUp="Override_TouchUp"/>
         </StackPanel>
         <RadioButton Content="" HorizontalAlignment="Left" Margin="158,174,0,0" VerticalAlignment="Top" IsChecked="{Binding R6}" Foreground="#FF17FF00" IsEnabled="False"/>
         <RadioButton Content="" HorizontalAlignment="Left" Margin="158,270,0,0" VerticalAlignment="Top" IsChecked="{Binding R4}" Foreground="#FF17FF00" IsEnabled="False"/>

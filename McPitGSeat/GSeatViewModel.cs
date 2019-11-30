@@ -3,10 +3,7 @@ using GSeatInfrastructure;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace McPitGSeat
 {
@@ -29,48 +26,55 @@ namespace McPitGSeat
 
         public void Enable()
         {
-            this.GY = 1.0f;
-#if DEBUG
+            try
+            {
+                this.GY = 1.0f;
+#if xxDEBUG
                 this.relays = new DebugRelays(6);
                 simulator = new UIDrivenSimSim(this);
 #else
-            this.relays = new DenkoviRelays(0);
-            simulator = new DCSA_10();
+                this.relays = new DenkoviRelays(0);
+                simulator = new DCSA_10();
 #endif
 
-            relays.OnRelayChanged += Relays_OnRelayChanged;
+                relays.OnRelayChanged += Relays_OnRelayChanged;
 
-            const double pistonDurationS = 0.2; // Guestmated for 20 PSI
+                const double pistonDurationS = 0.2; // Guestmated for 20 PSI
 
-            var shoulderPneumatic = new McPitPneumatic(relays,
-                                            inflationRelayNumber: 2,
-                                            deflationRelayNumber: 1,
-                                            inflationRatePctPerS: 1.0 / pistonDurationS,
-                                            deflationRatePctPerS: 0.8 / pistonDurationS);
-            var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
+                var shoulderPneumatic = new McPitPneumatic(relays,
+                                                inflationRelayNumber: 2,
+                                                deflationRelayNumber: 1,
+                                                inflationRatePctPerS: 1.0 / pistonDurationS,
+                                                deflationRatePctPerS: 0.8 / pistonDurationS);
+                var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
 
-            const double legInflationDurationS = 2.3;   // 2.3s@20PSI
-            const double legDeflationDurationS = 3.3;   // 3.3s@20PSI
+                const double legInflationDurationS = 2.3;   // 2.3s@20PSI
+                const double legDeflationDurationS = 3.3;   // 3.3s@20PSI
 
-            var leftLegPneumatic = new McPitPneumatic(relays,
-                inflationRelayNumber: 6,
-                                            deflationRelayNumber: 4,
-                                            inflationRatePctPerS: 1.0 / legInflationDurationS,
-                                            deflationRatePctPerS: 1.0 / legDeflationDurationS);
-            var rightLegPneumatic = new McPitPneumatic(relays,
-                inflationRelayNumber: 3,
-                                            deflationRelayNumber: 5,
-                                            inflationRatePctPerS: 1.0 / legInflationDurationS,
-                                            deflationRatePctPerS: 1.0 / legDeflationDurationS);
-            // Want a decent deadzone for horizontal roll, and then inverted flight is the same
-            var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.40f, 0), new Vector2(1, 1) });
+                var leftLegPneumatic = new McPitPneumatic(relays,
+                    inflationRelayNumber: 6,
+                                                deflationRelayNumber: 4,
+                                                inflationRatePctPerS: 1.0 / legInflationDurationS,
+                                                deflationRatePctPerS: 1.0 / legDeflationDurationS);
+                var rightLegPneumatic = new McPitPneumatic(relays,
+                    inflationRelayNumber: 3,
+                                                deflationRelayNumber: 5,
+                                                inflationRatePctPerS: 1.0 / legInflationDurationS,
+                                                deflationRatePctPerS: 1.0 / legDeflationDurationS);
+                // Want a decent deadzone for horizontal roll, and then inverted flight is the same
+                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.22f, 0), new Vector2(1, 1) });
 
-            core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
+                core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
 
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
-            dispatcherTimer.Tick += DispatcherTimer_Tick;
-            dispatcherTimer.Start();
+                dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);
+                dispatcherTimer.Tick += DispatcherTimer_Tick;
+                dispatcherTimer.Start();
+            }
+            catch (Exception ex)
+            {
+                System.Windows.MessageBox.Show(ex.ToString(), ex.Message);
+            }
         }
 
         internal void SetOverrides(bool leftLegInflate, bool leftLegDeflate, bool shoulderInflate, bool shoulderDeflate, bool rightLegInflate, bool rightLegDeflate)
@@ -92,31 +96,41 @@ namespace McPitGSeat
 
         public void EmergencyStop()
         {
-            if( this.core != null )
+            if (this.core != null)
                 this.core.EmergencyStop = true;
         }
 
         public async void Disable()
         {
-            if (this.dispatcherTimer != null)
+            try
             {
-                dispatcherTimer.Stop();
-                dispatcherTimer = null;
+                if (this.dispatcherTimer != null)
+                {
+                    dispatcherTimer.Stop();
+                    dispatcherTimer = null;
+                }
+
+                if (this.core != null)
+                {
+                    await this.core.ZeroPneumatics();
+                    this.core = null;
+                }
+
+                if (this.simulator != null)
+                {
+                    this.simulator.Dispose();
+                    this.simulator = null;
+                }
+
+                if (this.relays != null)
+                {
+                    this.relays.Dispose();
+                    this.relays = null;
+                }
             }
-
-            await this.core.ZeroPneumatics();
-            this.core = null;
-
-            if (this.simulator != null)
+            catch (Exception ex)
             {
-                this.simulator.Dispose();
-                this.simulator = null;
-            }
-
-            if (this.relays != null)
-            {
-                this.relays.Dispose();
-                this.relays = null;
+                System.Windows.MessageBox.Show(ex.ToString(), ex.Message);
             }
         }
 

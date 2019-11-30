@@ -7,6 +7,7 @@ using System.Linq;
 using System.Numerics;
 using System.Windows;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace McPitGSeat
 {
@@ -50,18 +51,18 @@ namespace McPitGSeat
             (this.DataContext as GSeatViewModel).EmergencyStop();
         }
         
-        private void Override_TouchDown(object sender, System.Windows.Input.TouchEventArgs e)
+        private void Override_TouchDown(object sender, MouseButtonEventArgs e)
         {
             (this.DataContext as GSeatViewModel).SetOverrides(
-                Override_LeftLegInflate.AreAnyTouchesDirectlyOver,
-                Override_LeftLegDeflate.AreAnyTouchesDirectlyOver,
-                Override_ShoulderInflate.AreAnyTouchesDirectlyOver,
-                Override_ShoulderDeflate.AreAnyTouchesDirectlyOver,
-                Override_RightLegInflate.AreAnyTouchesDirectlyOver,
-                Override_RighgtLegDeflate.AreAnyTouchesDirectlyOver
+                Override_LeftLegInflate.IsMouseDirectlyOver,
+                Override_LeftLegDeflate.IsMouseDirectlyOver,
+                Override_ShoulderInflate.IsMouseDirectlyOver,
+                Override_ShoulderDeflate.IsMouseDirectlyOver,
+                Override_RightLegInflate.IsMouseDirectlyOver,
+                Override_RighgtLegDeflate.IsMouseDirectlyOver
                 );
         }
-        private void Override_TouchUp(object sender, System.Windows.Input.TouchEventArgs e)
+        private void Override_TouchUp(object sender, MouseButtonEventArgs e)
         {
             (this.DataContext as GSeatViewModel).SetOverrides(
                 false, false,
