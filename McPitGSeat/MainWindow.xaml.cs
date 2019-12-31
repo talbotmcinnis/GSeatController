@@ -77,5 +77,19 @@ namespace McPitGSeat
             Properties.Settings.Default.LastPosY = this.Top;
             Properties.Settings.Default.Save();
         }
+
+        private void BtnCollapse_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Width != 75)
+            {
+                this.Width = 75;
+                this.grdExtras.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                this.Width = 510;
+                this.grdExtras.Visibility = Visibility.Visible;
+            }
+        }
     }
 }
