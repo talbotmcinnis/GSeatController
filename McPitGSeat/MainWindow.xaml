@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:McPitGSeat"
+        xmlns:view="clr-namespace:McPitGSeat.View"
         mc:Ignorable="d"
         Title="McPit GSeat Controller" Height="367.047" Width="610" ResizeMode="CanResizeWithGrip" LocationChanged="Window_LocationChanged" SizeToContent="Width"
         >
@@ -181,6 +182,87 @@
             <RadioButton Content="" HorizontalAlignment="Left" Margin="232,274,0,0" VerticalAlignment="Top" IsChecked="{Binding R1}" Foreground="#FF17FF00" IsEnabled="False"/>
             <RadioButton Content="" HorizontalAlignment="Left" Margin="347,178,0,0" VerticalAlignment="Top" IsChecked="{Binding R3}" Foreground="#FF17FF00" IsEnabled="False"/>
             <RadioButton Content="" HorizontalAlignment="Left" Margin="347,274,0,0" VerticalAlignment="Top" IsChecked="{Binding R5}" Foreground="#FF17FF00" IsEnabled="False"/>
+            <view:RotaryControl FontBrush="Black"
+      FontSize="12" Foreground="Black" Background="Transparent"
+      Value="{Binding PressureTweak, Mode=TwoWay}" 
+                                HorizontalAlignment="Right" Width="120" >
+                <view:RotaryControl.PointerType>rectangle</view:RotaryControl.PointerType>
+                <view:RotaryControl.PointerFill>
+                    <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                        <GradientStop Color="Black" Offset="0"/>
+                        <GradientStop Color="#AAAAAA" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </view:RotaryControl.PointerFill>
+                <view:RotaryControl.PointerLength>50</view:RotaryControl.PointerLength>
+                <view:RotaryControl.PointerWidth>3</view:RotaryControl.PointerWidth>
+                <view:RotaryControl.PointerAxleFill>Black</view:RotaryControl.PointerAxleFill>
+                <view:RotaryControl.PointerAxleRadius>4</view:RotaryControl.PointerAxleRadius>
+
+                <view:RotaryControl.OuterDialFill>Transparent</view:RotaryControl.OuterDialFill>
+                <view:RotaryControl.OuterDialBorderThickness>0
+                </view:RotaryControl.OuterDialBorderThickness>
+
+                <view:RotaryControl.InnerDialRadius>10</view:RotaryControl.InnerDialRadius>
+                <view:RotaryControl.InnerDialFill>White</view:RotaryControl.InnerDialFill>
+
+                <view:RotaryControl.LabelDialRadius>77</view:RotaryControl.LabelDialRadius>
+                <view:RotaryControl.MinimumValue>0</view:RotaryControl.MinimumValue>
+                
+                <view:RotaryControl.StartAngleInDegrees>210
+                </view:RotaryControl.StartAngleInDegrees>
+                <view:RotaryControl.EndAngleInDegrees>330</view:RotaryControl.EndAngleInDegrees>
+
+                <view:RotaryControl.MajorTickDialRadius>61
+                </view:RotaryControl.MajorTickDialRadius>
+                <view:RotaryControl.MajorTickLength>8</view:RotaryControl.MajorTickLength>
+                <view:RotaryControl.MajorTickWidth>1</view:RotaryControl.MajorTickWidth>
+                <view:RotaryControl.NumberOfMajorTicks>6</view:RotaryControl.NumberOfMajorTicks>
+                <view:RotaryControl.MajorTickIncrement>1</view:RotaryControl.MajorTickIncrement>
+                <view:RotaryControl.MajorTickBrush>Black</view:RotaryControl.MajorTickBrush>
+
+                <view:RotaryControl.MinorTickDialRadius>55
+                </view:RotaryControl.MinorTickDialRadius>
+                <view:RotaryControl.MinorTickLength>2</view:RotaryControl.MinorTickLength>
+                <view:RotaryControl.NumberOfMinorTicks>2</view:RotaryControl.NumberOfMinorTicks>
+                <view:RotaryControl.MinorTickBrush>Black</view:RotaryControl.MinorTickBrush>
+
+                <view:RotaryControl.SegmentThickness>15</view:RotaryControl.SegmentThickness>
+                <view:RotaryControl.SegmentRadius>67</view:RotaryControl.SegmentRadius>
+                <view:RotaryControl.Segments>
+                    <x:Array Type="{x:Type view:RotaryControlSegment}" >
+                        <view:RotaryControlSegment Fill="Orange" AngleInDegrees="20"/>
+                        <view:RotaryControlSegment Fill="Gold" AngleInDegrees="20"/>
+                        <view:RotaryControlSegment Fill="YellowGreen" AngleInDegrees="50"/>
+                        <view:RotaryControlSegment Fill="Gold" AngleInDegrees="20"/>
+                        <view:RotaryControlSegment Fill="Orange" AngleInDegrees="20"/>
+                        <view:RotaryControlSegment Fill="Red" AngleInDegrees="0"/>                        
+                    </x:Array>
+                </view:RotaryControl.Segments>
+
+                <view:RotaryControl.Arcs>
+                    <x:Array Type="{x:Type view:RotaryControlArc}" >
+                        <view:RotaryControlArc Fill="Black" StartAngleInDegrees="180"
+            AngleInDegrees="180" Radius="6" Thickness="1"
+            Stroke="Black" StrokeThickness="0"/>
+                        <view:RotaryControlArc Fill="Black" StartAngleInDegrees="0"
+            AngleInDegrees="180" Radius="6" Thickness="1"
+            Stroke="Black" StrokeThickness="0"/>
+
+                        <view:RotaryControlArc Fill="White" StartAngleInDegrees="200"
+            AngleInDegrees="10" Radius="67"
+            Thickness="35" StrokeThickness="0"/>
+
+                        <view:RotaryControlArc Fill="White" StartAngleInDegrees="200"
+            AngleInDegrees="140" Radius="90" Thickness="23"
+            Stroke="Black" StrokeThickness="0"/>
+                        <view:RotaryControlArc Fill="White" StartAngleInDegrees="200"
+            AngleInDegrees="140" Radius="52" Thickness="42"
+            Stroke="Black" StrokeThickness="0"/>
+                    </x:Array>
+
+                </view:RotaryControl.Arcs>
+            </view:RotaryControl>
+            <Label x:Name="label_Copy6" Content="BARO" HorizontalAlignment="Left" Margin="414,251,0,0" VerticalAlignment="Top"/>
         </Grid>
 
         <Grid HorizontalAlignment="Right" Width="Auto">

@@ -62,7 +62,11 @@ namespace McPitGSeat
                                                 inflationRatePctPerS: 1.0 / legInflationDurationS,
                                                 deflationRatePctPerS: 1.0 / legDeflationDurationS);
                 // Want a decent deadzone for horizontal roll, and then inverted flight is the same
-                var legTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.22f, 0), new Vector2(1, 1) });
+                var legTransferCurve = new TransferCurve(new List<Vector2>() {
+                    new Vector2(0, 0), // Identity zero
+                    new Vector2(0.22f, 0), // Deadzone near the bottom
+                    new Vector2(1, 0.75f), // Max output to limit leg pressures
+                });
 
                 core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
 
@@ -333,6 +337,24 @@ namespace McPitGSeat
             {
                 rightLegPressurePercent = value;
                 OnPropertyChanged("RightLegPressurePercent");
+            }
+        }
+
+        double pressureTweak;
+        public double PressureTweak
+        {
+            get { return pressureTweak; }
+
+            set
+            {
+                //System.Diagnostics.Debug.WriteLine($"PressureTweak: {0.5 + (pressureTweak / 5.0):F2}");
+                if (value != pressureTweak && this.core != null)
+                {
+                    this.core.SetPressureTweak(GSeatControllerCore.GSeatControllerCore.TWEAK_MIN + (pressureTweak / 5.0/(GSeatControllerCore.GSeatControllerCore.TWEAK_MAX- GSeatControllerCore.GSeatControllerCore.TWEAK_MIN)));
+                }
+
+                pressureTweak = value;
+                OnPropertyChanged("PressureTweak");
             }
         }
     }
