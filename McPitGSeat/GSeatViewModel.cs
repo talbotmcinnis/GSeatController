@@ -39,7 +39,7 @@ namespace McPitGSeat
 
                 relays.OnRelayChanged += Relays_OnRelayChanged;
 
-                const double pistonDurationS = 0.2; // Guestmated for 20 PSI
+                const double pistonDurationS = 0.8; // Guestmated for 20 PSI
 
                 var shoulderPneumatic = new McPitPneumatic(relays,
                                                 inflationRelayNumber: 2,
