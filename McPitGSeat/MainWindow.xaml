@@ -65,7 +65,7 @@
         <Image x:Name="panel_backplate_bottom_left_png" Source="panel-backplate-bottom-left.png" Width="35" HorizontalAlignment="Right" VerticalAlignment="Top" />
         <Image x:Name="panel_backplate_bottom_right_png" Source="panel-backplate-bottom-right.png" Width="35" HorizontalAlignment="Left" VerticalAlignment="Top"/>
 
-        <Grid Name="grdExtras" Visibility="Visible" HorizontalAlignment="Left" Width="500">
+        <Grid Name="grdExtras" Visibility="Visible" HorizontalAlignment="Left" Width="600">
             <Grid Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="134,22,0,0" Background="DarkGray">
                 <Border BorderBrush="LightGray" BorderThickness="5">
                     <Viewport3D Name="myViewport"  >
@@ -185,7 +185,7 @@
             <view:RotaryControl FontBrush="Black"
       FontSize="12" Foreground="Black" Background="Transparent"
       Value="{Binding PressureTweak, Mode=TwoWay}" 
-                                HorizontalAlignment="Right" Width="120" >
+                                 Width="120" Margin="320,0,0,0" >
                 <view:RotaryControl.PointerType>rectangle</view:RotaryControl.PointerType>
                 <view:RotaryControl.PointerFill>
                     <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
