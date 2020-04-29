@@ -64,11 +64,12 @@ namespace McPitGSeat
                 // Want a decent deadzone for horizontal roll, and then inverted flight is the same
                 var legTransferCurve = new TransferCurve(new List<Vector2>() {
                     new Vector2(0, 0), // Identity zero
-                    new Vector2(0.22f, 0), // Deadzone near the bottom
+                    //new Vector2(0.05f, 0), // Deadzone near the bottom
                     new Vector2(1, 0.75f), // Max output to limit leg pressures
                 });
 
-                core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve);
+                float hysteresisPct = 0.05f;
+                core = new GSeatControllerCore.GSeatControllerCore(simulator, shoulderPneumatic, leftLegPneumatic, rightLegPneumatic, shoulderTransferCurve, legTransferCurve, hysteresisPct);
 
                 dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
                 dispatcherTimer.Interval = TimeSpan.FromMilliseconds(50);

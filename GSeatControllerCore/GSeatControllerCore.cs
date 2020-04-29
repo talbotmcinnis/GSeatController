@@ -26,7 +26,8 @@ namespace GSeatControllerCore
             ISingleAxisPneumatic leftLegPneumatic,
             ISingleAxisPneumatic rightLegPneumatic,
             TransferCurve shoulderTransferCurve,
-            TransferCurve legTransferCurve)
+            TransferCurve legTransferCurve,
+            float hysteresisPct)
         {
             this.simulator = simulator;
             this.shoulderPneumatic = shoulderPneumatic;
@@ -37,9 +38,9 @@ namespace GSeatControllerCore
             this.LeftLegTPC = new TimedPressureController(this.leftLegPneumatic);
             this.RightLegTPC = new TimedPressureController(this.rightLegPneumatic);
 
-            this.shoulderBuffer = new HysteresisBuffer(.15);
-            this.leftLegBuffer = new HysteresisBuffer(.15);
-            this.rightLegBuffer = new HysteresisBuffer(.15);
+            this.shoulderBuffer = new HysteresisBuffer(hysteresisPct);
+            this.leftLegBuffer = new HysteresisBuffer(hysteresisPct);
+            this.rightLegBuffer = new HysteresisBuffer(hysteresisPct);
 
             this.shoulderTransferCurve = shoulderTransferCurve;
             this.legTransferCurve = legTransferCurve;
@@ -100,8 +101,9 @@ namespace GSeatControllerCore
             else if( sample.Acceleration.Y < 1 )
                 gForceShoulder = (sample.Acceleration.Y - 1) / -2;  // Negative Gs
 
-            var pitchShoulderForce = sample.Pitch < 0 ? -sample.Pitch / 90 : 0;
-            var rollShoulderForce = Math.Abs(sample.Roll) > 120 ? (Math.Abs(sample.Roll)-120)/(180-120): 0;
+            var pitchShoulderForce = sample.Pitch < 0 ? -sample.Pitch / 90 : 0; // Add force when descending, 0 to 1
+
+            var rollShoulderForce = Math.Abs(sample.Roll) > 120 ? (Math.Abs(sample.Roll)-120)/(180-120): 0; // If rolled inverted, add shoulder force 0-1
             var desiredShoulderPressure = accelShoulder + gForceShoulder + pitchShoulderForce + rollShoulderForce;
 
             var normalizedRoll = sample.Roll;

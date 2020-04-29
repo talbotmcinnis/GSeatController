@@ -15,32 +15,38 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_057628CCDBFBDF1F845E1353865C7472"
+        "MsmKey" = "8:_96C4BA2E9A988D8B69DC44E8A4BBE1A8"
         "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_057628CCDBFBDF1F845E1353865C7472"
-        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "MsmKey" = "8:_96C4BA2E9A988D8B69DC44E8A4BBE1A8"
+        "OwnerKey" = "8:_EF5D1291D9FF68146DCB961F8D32B589"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "MsmKey" = "8:_AB8255649FC886A17FA8BC0816776D87"
+        "OwnerKey" = "8:_EF5D1291D9FF68146DCB961F8D32B589"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AB8255649FC886A17FA8BC0816776D87"
         "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B586F512CFC82AB8933B29E1760C9026"
+        "MsmKey" = "8:_B64B856FC05185EAD2B50A97ED26FF3D"
         "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B586F512CFC82AB8933B29E1760C9026"
-        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "MsmKey" = "8:_B64B856FC05185EAD2B50A97ED26FF3D"
+        "OwnerKey" = "8:_EF5D1291D9FF68146DCB961F8D32B589"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -51,13 +57,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_FB8E3BE416A0EAC15507859965A6FF97"
-        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FB8E3BE416A0EAC15507859965A6FF97"
+        "MsmKey" = "8:_EF5D1291D9FF68146DCB961F8D32B589"
         "OwnerKey" = "8:_D84524E0FB464F29A7352224A79E3585"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -76,25 +76,25 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "OwnerKey" = "8:_EF5D1291D9FF68146DCB961F8D32B589"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FB8E3BE416A0EAC15507859965A6FF97"
+        "OwnerKey" = "8:_AB8255649FC886A17FA8BC0816776D87"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_057628CCDBFBDF1F845E1353865C7472"
+        "OwnerKey" = "8:_B64B856FC05185EAD2B50A97ED26FF3D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B586F512CFC82AB8933B29E1760C9026"
+        "OwnerKey" = "8:_96C4BA2E9A988D8B69DC44E8A4BBE1A8"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -198,76 +198,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_057628CCDBFBDF1F845E1353865C7472"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:FTD2XX_NET, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_057628CCDBFBDF1F845E1353865C7472"
-                    {
-                    "Name" = "8:FTD2XX_NET.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:FTD2XX_NET.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7D9F98546AFD490AFC4433D894996BED"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:GSeatInfrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_7D9F98546AFD490AFC4433D894996BED"
-                    {
-                    "Name" = "8:GSeatInfrastructure.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:GSeatInfrastructure.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B586F512CFC82AB8933B29E1760C9026"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_96C4BA2E9A988D8B69DC44E8A4BBE1A8"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:GSeatControllerCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B586F512CFC82AB8933B29E1760C9026"
+                    "_96C4BA2E9A988D8B69DC44E8A4BBE1A8"
                     {
                     "Name" = "8:GSeatControllerCore.dll"
                     "Attributes" = "3:512"
@@ -291,20 +229,82 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_FB8E3BE416A0EAC15507859965A6FF97"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_AB8255649FC886A17FA8BC0816776D87"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_FB8E3BE416A0EAC15507859965A6FF97"
+                    "_AB8255649FC886A17FA8BC0816776D87"
                     {
                     "Name" = "8:Newtonsoft.Json.dll"
                     "Attributes" = "3:512"
                     }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B64B856FC05185EAD2B50A97ED26FF3D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:FTD2XX_NET, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_B64B856FC05185EAD2B50A97ED26FF3D"
+                    {
+                    "Name" = "8:FTD2XX_NET.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:FTD2XX_NET.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EF5D1291D9FF68146DCB961F8D32B589"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:GSeatInfrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_EF5D1291D9FF68146DCB961F8D32B589"
+                    {
+                    "Name" = "8:GSeatInfrastructure.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:GSeatInfrastructure.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_0DFE413329F348FEB18AD5E8A118C00A"
@@ -409,15 +409,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GSeat Controller"
-        "ProductCode" = "8:{EE95FAD9-ED13-4ABA-A1FD-CF43A1CBD2DE}"
-        "PackageCode" = "8:{402ED61A-B25E-40F1-ABD8-17F542C0B136}"
+        "ProductCode" = "8:{30627A80-2A17-4457-AC05-36FC550E6A31}"
+        "PackageCode" = "8:{9E79F1CD-5372-46A6-B135-7E872AD70013}"
         "UpgradeCode" = "8:{363171FA-AD63-42A0-A9DC-DD2F28DE624A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.2.0"
+        "ProductVersion" = "8:1.3.0"
         "Manufacturer" = "8:Puma"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
