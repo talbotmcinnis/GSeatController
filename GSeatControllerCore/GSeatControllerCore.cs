@@ -50,6 +50,7 @@ namespace GSeatControllerCore
             if (EmergencyStop || isZeroing)
                 return;
 
+            // Step: Read from the Sim
             var sample = simulator.GetSample;
 
             if (sample == null)
@@ -66,6 +67,7 @@ namespace GSeatControllerCore
                     return;
             }
 
+            // Step: Apply Overrides
             if (override_leftLeg != null || override_rightLeg != null || override_shoulder != null)
             {
                 System.Diagnostics.Debug.WriteLine("Applying override");
@@ -88,6 +90,7 @@ namespace GSeatControllerCore
                 return;
             }
 
+            // Step: Convert sim data sample to pressures
             // Shoulder pressure linear with G force for acceleration, or inverted, or Pure Gs
             // Roll pressure linear with orientation roll, reduced by Z-Gs
             var accelShoulder = sample.Acceleration.Z < 0 ? -sample.Acceleration.Z / 2 : 0;
@@ -118,17 +121,22 @@ namespace GSeatControllerCore
                 desiredRightLegPressure -= (Math.Abs(sample.Pitch) - pitchRollDeadzone) / (90 -pitchRollDeadzone);
             }
 
-            // Translate the raw data through a transfer curve
+            // Step: Translate the raw data through a transfer curve
             desiredShoulderPressure = shoulderTransferCurve.Transfer(desiredShoulderPressure);
             desiredLeftLegPressure = legTransferCurve.Transfer(desiredLeftLegPressure);
             desiredRightLegPressure = legTransferCurve.Transfer(desiredRightLegPressure);
 
-            // Apply a hysteresis
+            // Step: Apply a hysteresis
             desiredShoulderPressure = shoulderBuffer.Buffer(desiredShoulderPressure);
             desiredLeftLegPressure = leftLegBuffer.Buffer(desiredLeftLegPressure);
             desiredRightLegPressure = rightLegBuffer.Buffer(desiredRightLegPressure);
 
-            // Apply the calculated pressures
+            // Step: Apply the pressure tweaks
+            desiredShoulderPressure *= _pressureTweak;
+            desiredLeftLegPressure *= _pressureTweak;
+            desiredRightLegPressure *= _pressureTweak;
+
+            // Step: Apply the calculated pressures
             await this.ShoulderTPC.SetPressurePercent(desiredShoulderPressure);
             await this.LeftLegTPC.SetPressurePercent(desiredLeftLegPressure);
             await this.RightLegTPC.SetPressurePercent(desiredRightLegPressure);
@@ -199,6 +207,18 @@ namespace GSeatControllerCore
             this.RightLegTPC.Reset();
 
             isZeroing = false;
+        }
+
+        public static readonly double TWEAK_MIN = 0.75;
+        public static readonly double TWEAK_MAX = 1.25;
+        private double _pressureTweak = 1.0d;
+        public void SetPressureTweak(double pressureTweak)
+        {
+            if (pressureTweak < TWEAK_MIN || pressureTweak > TWEAK_MAX)
+                throw new ArgumentOutOfRangeException($"Pressure tweak constrained to {TWEAK_MIN:F2} to {TWEAK_MAX:F2}");
+
+            System.Diagnostics.Debug.WriteLine($"Pressure Tweak: {pressureTweak:F2}");
+            _pressureTweak = pressureTweak;
         }
     }
 }

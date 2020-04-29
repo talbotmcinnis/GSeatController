@@ -76,19 +76,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_FBCDB6714FFB6A865D1EC9EAEE0C092B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B586F512CFC82AB8933B29E1760C9026"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_057628CCDBFBDF1F845E1353865C7472"
+        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -100,7 +88,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_7D9F98546AFD490AFC4433D894996BED"
+        "OwnerKey" = "8:_057628CCDBFBDF1F845E1353865C7472"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_B586F512CFC82AB8933B29E1760C9026"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_FBCDB6714FFB6A865D1EC9EAEE0C092B"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -205,6 +205,11 @@
             "AssemblyAsmDisplayName" = "8:FTD2XX_NET, Version=1.0.14.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_057628CCDBFBDF1F845E1353865C7472"
+                    {
+                    "Name" = "8:FTD2XX_NET.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:FTD2XX_NET.dll"
             "TargetName" = "8:"
@@ -231,6 +236,11 @@
             "AssemblyAsmDisplayName" = "8:GSeatInfrastructure, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_7D9F98546AFD490AFC4433D894996BED"
+                    {
+                    "Name" = "8:GSeatInfrastructure.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:GSeatInfrastructure.dll"
             "TargetName" = "8:"
@@ -257,6 +267,11 @@
             "AssemblyAsmDisplayName" = "8:GSeatControllerCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_B586F512CFC82AB8933B29E1760C9026"
+                    {
+                    "Name" = "8:GSeatControllerCore.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:GSeatControllerCore.dll"
             "TargetName" = "8:"
@@ -283,6 +298,11 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
+                    "_FB8E3BE416A0EAC15507859965A6FF97"
+                    {
+                    "Name" = "8:Newtonsoft.Json.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -309,6 +329,11 @@
             "AssemblyAsmDisplayName" = "8:System.Net.Http, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
+                    "_FBCDB6714FFB6A865D1EC9EAEE0C092B"
+                    {
+                    "Name" = "8:System.Net.Http.dll"
+                    "Attributes" = "3:512"
+                    }
                 }
             "SourcePath" = "8:System.Net.Http.dll"
             "TargetName" = "8:"
@@ -384,15 +409,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:GSeat Controller"
-        "ProductCode" = "8:{542F1D11-8E85-4C40-B859-8BCD58E35B85}"
-        "PackageCode" = "8:{63F08969-2EC9-46CE-B294-E432C30F2F7E}"
+        "ProductCode" = "8:{EE95FAD9-ED13-4ABA-A1FD-CF43A1CBD2DE}"
+        "PackageCode" = "8:{402ED61A-B25E-40F1-ABD8-17F542C0B136}"
         "UpgradeCode" = "8:{363171FA-AD63-42A0-A9DC-DD2F28DE624A}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.1.2"
+        "ProductVersion" = "8:1.2.0"
         "Manufacturer" = "8:Puma"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
