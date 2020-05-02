@@ -29,7 +29,7 @@ namespace McPitGSeat
             try
             {
                 this.GY = 1.0f;
-#if xxDEBUG
+#if DEBUG
                 this.relays = new DebugRelays(6);
                 simulator = new UIDrivenSimSim(this);
 #else
@@ -351,7 +351,7 @@ namespace McPitGSeat
                 //System.Diagnostics.Debug.WriteLine($"PressureTweak: {0.5 + (pressureTweak / 5.0):F2}");
                 if (value != pressureTweak && this.core != null)
                 {
-                    this.core.SetPressureTweak(GSeatControllerCore.GSeatControllerCore.TWEAK_MIN + (pressureTweak / 5.0/(GSeatControllerCore.GSeatControllerCore.TWEAK_MAX- GSeatControllerCore.GSeatControllerCore.TWEAK_MIN)));
+                    this.core.SetPressureTweak(GSeatControllerCore.GSeatControllerCore.TWEAK_MIN + ((pressureTweak / 5.0)*(GSeatControllerCore.GSeatControllerCore.TWEAK_MAX- GSeatControllerCore.GSeatControllerCore.TWEAK_MIN)));
                 }
 
                 pressureTweak = value;

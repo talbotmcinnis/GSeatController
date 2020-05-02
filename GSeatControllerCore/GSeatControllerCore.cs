@@ -96,12 +96,12 @@ namespace GSeatControllerCore
             // Roll pressure linear with orientation roll, reduced by Z-Gs
             var accelShoulder = sample.Acceleration.Z < 0 ? -sample.Acceleration.Z / 2 : 0;
             float gForceShoulder = 0;
-            if( sample.Acceleration.Y > 1 )
-                gForceShoulder = (sample.Acceleration.Y - 1) / 4;  // Positive Gs
-            else if( sample.Acceleration.Y < 1 )
-                gForceShoulder = (sample.Acceleration.Y - 1) / -2;  // Negative Gs
+            if( sample.Acceleration.Y > 2 )
+                gForceShoulder = (sample.Acceleration.Y - 2) / 4;  // Positive Gs
+            //else if( sample.Acceleration.Y < 1 )
+            //    gForceShoulder = (sample.Acceleration.Y - 1) / -2;  // Negative Gs
 
-            var pitchShoulderForce = sample.Pitch < 0 ? -sample.Pitch / 90 : 0; // Add force when descending, 0 to 1
+            var pitchShoulderForce = sample.Pitch < 0 ? (-sample.Pitch / 90)/4 : 0; // Add force when descending, 0 to 1
 
             var rollShoulderForce = Math.Abs(sample.Roll) > 120 ? (Math.Abs(sample.Roll)-120)/(180-120): 0; // If rolled inverted, add shoulder force 0-1
             var desiredShoulderPressure = accelShoulder + gForceShoulder + pitchShoulderForce + rollShoulderForce;
