@@ -32,6 +32,7 @@ namespace McPitGSeat
 #if DEBUG
                 this.relays = new DebugRelays(6);
                 simulator = new UIDrivenSimSim(this);
+                //simulator = new DCSA_10();
 #else
                 this.relays = new DenkoviRelays(0);
                 simulator = new DCSA_10();

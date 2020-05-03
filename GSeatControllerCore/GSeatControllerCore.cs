@@ -68,6 +68,8 @@ namespace GSeatControllerCore
                     return;
             }
 
+            //System.Diagnostics.Debug.WriteLine($"SimPitch {sample.Pitch}");
+
             // Step: Apply Overrides
             if (override_leftLeg != null || override_rightLeg != null || override_shoulder != null)
             {
@@ -101,7 +103,7 @@ namespace GSeatControllerCore
             //else if( sample.Acceleration.Y < 1 )
             //    gForceShoulder = (sample.Acceleration.Y - 1) / -2;  // Negative Gs
 
-            var pitchShoulderForce = sample.Pitch < 0 ? (-sample.Pitch / 90)/4 : 0; // Add force when descending, 0 to 1
+            var pitchShoulderForce = sample.Pitch < 0 ? (-sample.Pitch / 90)/4 : 0; // Add force when descending
 
             var rollShoulderForce = Math.Abs(sample.Roll) > 120 ? (Math.Abs(sample.Roll)-120)/(180-120): 0; // If rolled inverted, add shoulder force 0-1
             var desiredShoulderPressure = accelShoulder + gForceShoulder + pitchShoulderForce + rollShoulderForce;
