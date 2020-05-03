@@ -31,6 +31,11 @@ namespace GSeatInfrastructure
             await PulseRelay(deflationRelayNumber, durationS);
         }
 
+        public void Zeroize()
+        {
+            this.relayController.SetRelayState(deflationRelayNumber, false);
+        }
+
         private async Task PulseRelay(int relayNumber, double durationS)
         {
             // Activate the relay

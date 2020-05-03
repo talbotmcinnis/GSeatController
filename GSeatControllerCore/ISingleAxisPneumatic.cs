@@ -10,6 +10,8 @@ namespace GSeatControllerCore
         Task Inflate(double durationS);
         Task Deflate(double durationS);
 
+        void Zeroize();
+
         /// <summary>
         /// Percentage Inflation per second
         /// </summary>
