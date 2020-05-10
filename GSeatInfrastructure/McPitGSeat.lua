@@ -27,6 +27,8 @@ end
 function LuaExportActivityNextEvent(t)
 	local ownData = LoGetSelfData();
 	local accel = LoGetAccelerationUnits();
+	local altAglM = LoGetAltitudeAboveGroundLevel();
+	local velocity = LoGetVectorVelocity();
 	
 	payload = 
 	{
@@ -36,7 +38,13 @@ function LuaExportActivityNextEvent(t)
 			Z = accel.z
 		},
 		Pitch = ownData.Pitch,
-		Roll = ownData.Bank
+		Roll = ownData.Bank,
+		AltAGLM = altAglM,
+		Velocity = {
+			X = velocity.x,
+			Y = velocity.y,
+			Z = velocity.z
+		}
 	}
 	
 	socket.try(udpsend:sendto(JSON:encode(payload).." \n", host, port))

@@ -68,6 +68,19 @@ namespace GSeatControllerCore
                     return;
             }
 
+            // If we appear to eb on the ground or close to still, return early to avoid jumpyness on the ground
+            if (
+                sample.AltAGLM < 10 ||
+                (sample.Velocity.Length() < 20 )  // m/s
+                )
+            {
+                //await this.ShoulderTPC.SetPressurePercent(desiredShoulderPressure);
+                // Set the legs to zero to ensure they drain while idle
+                await this.LeftLegTPC.SetPressurePercent(0);
+                await this.RightLegTPC.SetPressurePercent(0);
+                return;
+            }
+
             //System.Diagnostics.Debug.WriteLine($"SimPitch {sample.Pitch}");
 
             // Step: Apply Overrides
