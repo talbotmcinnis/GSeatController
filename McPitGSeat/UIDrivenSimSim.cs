@@ -24,6 +24,8 @@ namespace McPitGSeat
                 result.Roll = vm.Roll;
                 result.Pitch = -vm.Pitch;
                 result.Acceleration = new System.Numerics.Vector3(0, vm.GY, vm.GZ);
+                result.AltAGLM = 5000;
+                result.Velocity = new System.Numerics.Vector3(20, 20, 20);
                 return result;
             }
         }
