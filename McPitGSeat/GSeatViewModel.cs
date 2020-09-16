@@ -40,28 +40,23 @@ namespace McPitGSeat
 
                 relays.OnRelayChanged += Relays_OnRelayChanged;
 
-                const double pistonDurationS = 0.8; // Guestmated for 20 PSI
-
                 var shoulderPneumatic = new McPitPneumatic(relays,
                                                 inflationRelayNumber: 2,
                                                 deflationRelayNumber: 1,
-                                                inflationRatePctPerS: 1.0 / pistonDurationS,
-                                                deflationRatePctPerS: 0.8 / pistonDurationS);
+                                                inflationRatePctPerS: 1.0 / Properties.Settings.Default.ShoulderInflationDurationS,
+                                                deflationRatePctPerS: 1.0 / Properties.Settings.Default.ShoulderDeflationDurationS);
                 var shoulderTransferCurve = new TransferCurve(new List<Vector2>() { new Vector2(0, 0), new Vector2(0.20f, 0), new Vector2(1, 1) });
-
-                const double legInflationDurationS = 2.3;   // 2.3s@20PSI
-                const double legDeflationDurationS = 3.3;   // 3.3s@20PSI
 
                 var leftLegPneumatic = new McPitPneumatic(relays,
                     inflationRelayNumber: 6,
                                                 deflationRelayNumber: 4,
-                                                inflationRatePctPerS: 1.0 / legInflationDurationS,
-                                                deflationRatePctPerS: 1.0 / legDeflationDurationS);
+                                                inflationRatePctPerS: 1.0 / Properties.Settings.Default.LegInflationDurationS,
+                                                deflationRatePctPerS: 1.0 / Properties.Settings.Default.LegDeflationDurationS);
                 var rightLegPneumatic = new McPitPneumatic(relays,
                     inflationRelayNumber: 3,
                                                 deflationRelayNumber: 5,
-                                                inflationRatePctPerS: 1.0 / legInflationDurationS,
-                                                deflationRatePctPerS: 1.0 / legDeflationDurationS);
+                                                inflationRatePctPerS: 1.0 / Properties.Settings.Default.LegInflationDurationS,
+                                                deflationRatePctPerS: 1.0 / Properties.Settings.Default.LegDeflationDurationS);
                 // Want a decent deadzone for horizontal roll, and then inverted flight is the same
                 var legTransferCurve = new TransferCurve(new List<Vector2>() {
                     new Vector2(0, 0), // Identity zero
