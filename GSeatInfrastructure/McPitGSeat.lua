@@ -1,44 +1,63 @@
-﻿function LuaExportStart()
+GS = {}
+
+package.path  = package.path..";"..lfs.currentdir().."/LuaSocket/?.lua"
+package.cpath = package.cpath..";"..lfs.currentdir().."/LuaSocket/?.dll"
+	
+-- Prev Export functions.
+GS.PrevExport = {}
+GS.PrevExport.LuaExportStart = LuaExportStart
+GS.PrevExport.LuaExportStop = LuaExportStop
+GS.PrevExport.LuaExportAfterNextFrame = LuaExportAfterNextFrame
+
+LuaExportStart = function()
 	-- Works once just before mission start.
-	package.path  = package.path..";"..lfs.currentdir().."/LuaSocket/?.lua"
-	package.cpath = package.cpath..";"..lfs.currentdir().."/LuaSocket/?.dll"
-	socket = require("socket")
-	host = host or "127.0.0.1"
-	port = port or 8804
+	GS.socket = require("socket")
+	GS.host = host or "127.0.0.1"
+	GS.port = port or 8804
 	-- c = socket.try(socket.connect(host, port))	--  connect to the listener socket
 	-- c:setoption("tcp-nodelay",true)  -- set immediate transmission mode
-	udpsend = socket.udp()
+	GS.udpsend = GS.socket.udp()
 	
-	JSON = loadfile("Scripts\\JSON.lua")()
+	GS.JSON = loadfile("Scripts\\JSON.lua")()
 	
-	payload = {
+	GS.payload = {
 		Command = "Start"
 	}
-	socket.try(udpsend:sendto(JSON:encode(payload).." \n", host, port))
+	GS.socket.try(GS.udpsend:sendto(GS.JSON:encode(GS.payload).." \n", GS.host, GS.port))
+	
+	-- Chain previously-included export as necessary
+	if GS.PrevExport.LuaExportStart then
+		GS.PrevExport.LuaExportStart()
+	end
 end
 
-function LuaExportStop()
-	payload = {
+LuaExportStop = function()
+	GS.payload = {
 		Command = "Stop"
 	}
-	socket.try(udpsend:sendto(JSON:encode(payload).." \n", host, port))
+	GS.socket.try(GS.udpsend:sendto(GS.JSON:encode(GS.payload).." \n", GS.host, GS.port))
+	
+	-- Chain previously-included export as necessary
+	if GS.PrevExport.LuaExportStop then
+		GS.PrevExport.LuaExportStop()
+	end
 end
 
-function LuaExportActivityNextEvent(t)
-	local ownData = LoGetSelfData();
-	local accel = LoGetAccelerationUnits();
+LuaExportAfterNextFrame = function()
+	local gs_accel = LoGetAccelerationUnits();
+	local gs_ownData = LoGetSelfData();
 	local altAglM = LoGetAltitudeAboveGroundLevel();
 	local velocity = LoGetVectorVelocity();
 	
-	payload = 
+	GS.payload = 
 	{
 		Acceleration = {
-			X = accel.x,
-			Y = accel.y,
-			Z = accel.z
+			X = gs_accel.x,
+			Y = gs_accel.y,
+			Z = gs_accel.z
 		},
-		Pitch = ownData.Pitch,
-		Roll = ownData.Bank,
+		Pitch = gs_ownData.Pitch,
+		Roll = gs_ownData.Bank,
 		AltAGLM = altAglM,
 		Velocity = {
 			X = velocity.x,
@@ -47,7 +66,10 @@ function LuaExportActivityNextEvent(t)
 		}
 	}
 	
-	socket.try(udpsend:sendto(JSON:encode(payload).." \n", host, port))
+	GS.socket.try(GS.udpsend:sendto(GS.JSON:encode(GS.payload).." \n", GS.host, GS.port))
 	
-	return t + 0.2	-- This equals the "frame" rate of exports.  Events appear to be each second, so 0.2 = 5 FPS... I think :)
+	-- Chain previously-included export as necessary
+	if GS.PrevExport.LuaExportAfterNextFrame then
+		GS.PrevExport.LuaExportAfterNextFrame()
+	end
 end
