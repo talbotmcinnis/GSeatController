@@ -1,0 +1,1 @@
+local mcPitGseat=require('lfs');dofile(mcPitGseat.writedir()..[[Scripts\McPitGSeat.lua]])

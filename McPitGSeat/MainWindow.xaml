@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:McPitGSeat"
         xmlns:view="clr-namespace:McPitGSeat.View"
         mc:Ignorable="d"
-        Title="McPit GSeat Controller" Height="367.047" Width="610" ResizeMode="NoResize" LocationChanged="Window_LocationChanged" SizeToContent="Width"
+        Title="McPit GSeat Controller" Height="367.047" Width="610" ResizeMode="NoResize" LocationChanged="Window_LocationChanged" SizeToContent="Width" Icon="GSeat.ico"
         >
     <Window.Resources>
         <Style TargetType="{x:Type Label}">
